@@ -17,6 +17,10 @@ public class PNBatalhaNaval extends JPanel implements MouseListener {
 	double yIni = 50.0, yFim = hei - 3* yIni;
 	double xIni2 = wid/2 + xIni;
 	double xFim2 = wid - xIni;
+	double yIni2 = yIni;
+	double yFim2 = yFim;
+	double larg = (xFim - xIni)/15;
+	double alt = (yFim - yIni) / 15;
 	Celula tab1[][] = new Celula[15][15];
 	Celula tab2[][] = new Celula[15][15];
 	Line2D.Double lnX1[] = new Line2D.Double[16];
@@ -26,10 +30,8 @@ public class PNBatalhaNaval extends JPanel implements MouseListener {
 	public PNBatalhaNaval(CtrlRegras c) {
 		double x1, x2, y1, y2;
 		y1 = yIni; y2=yIni;
-		double larg = (xFim - xIni)/15;
-		double alt = (yFim - yIni) / 15;
 		addMouseListener(this);
-		
+		ctrl = c;
 		for(int i =0; i<15; i++) {
 			x1 = xIni; x2=xIni2;
 			for(int j=0; j<15; j++) {
@@ -58,15 +60,21 @@ public class PNBatalhaNaval extends JPanel implements MouseListener {
 	}
 	
 	public void paintComponent(Graphics g) {
+		int campoJog1[][], campoJog2[][];
 		super.paintComponent(g);
 		Graphics2D g2d=(Graphics2D) g;
 		Rectangle2D rt;
+		campoJog1 = ctrl.getTab1();
+		campoJog2 = ctrl.getTab2();
 		for(int i=0;i<15;i++) {
 			for(int j=0;j<15;j++) {
-				g2d.setPaint(Color.cyan);
+				if(campoJog1[j][i] == 1) g2d.setPaint(Color.red);
+				else g2d.setPaint(Color.cyan);
 				rt=new Rectangle2D.Double(tab1[i][j].x, tab1[i][j].y, tab1[i][j].larg - 4.0, tab1[i][j].alt - 4.0);
 				//System.out.print("Rectangle2D.Double("+tab1[i][j].x+", "+tab1[i][j].y + ", "+tab1[i][j].larg + ", " + tab1[i][j].alt +");\n");
 				g2d.fill(rt);
+				if(campoJog2[j][i] == 1) g2d.setPaint(Color.red);
+				else g2d.setPaint(Color.cyan);
 				rt=new Rectangle2D.Double(tab2[i][j].x, tab2[i][j].y, tab2[i][j].larg - 4.0, tab2[i][j].alt - 4.0);
 				g2d.fill(rt);
 			}
@@ -84,10 +92,17 @@ public class PNBatalhaNaval extends JPanel implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		int x=e.getX(),y=e.getY();
 		if(x < xFim && x > xIni && y < yFim && y > yIni) {
-			JOptionPane.showMessageDialog(this, "Tabuleiro1");
+			x = (int)(((double) x - xIni) / larg);
+			y = (int)(((double) y - yIni) / alt);
+			JOptionPane.showMessageDialog(this, "Vez " + ctrl.getVez() + " Tabuleiro 1   x=" + x + " y=" + y);
+			ctrl.atira(1, x, y);
+			
 		}
 		else if (x < xFim2 && x > xIni2 && y < yFim2 && y > yIni2) {
-			JOptionPane.showMessageDialog(this, "Tabuleiro2");
+			x = (int)(((double) x - xIni2) / larg);
+			y = (int)(((double) y - yIni2) / alt);
+			JOptionPane.showMessageDialog(this, "Vez " + ctrl.getVez() + " Tabuleiro 2   x=" + x + " y=" + y);
+			ctrl.atira(2, x, y);
 		}
 //		else if(x < xFim2 && x > xIni2 && y < yFim2 && y > yIni2);
 		System.out.print("Mouse Clicado");

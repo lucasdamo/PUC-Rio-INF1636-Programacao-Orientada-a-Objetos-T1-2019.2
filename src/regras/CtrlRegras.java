@@ -20,14 +20,27 @@ public class CtrlRegras {
 		return campoJog1;
 	}
 	public int[][] getTab2(){
-		return campoJog1;
+		return campoJog2;
 	}
 	public int getVez() {
 		return vez;
 	}
 	public void mudaVez() {
-		if(vez==0) vez = 1;
-		else vez = 0;
+		if(vez == 1) vez = 2;
+		else vez = 1;
 	}
-	
+	public void atira(int tab, int i, int j) {
+		if(tab == 1) {
+			if(vez == 1) {
+				campoJog1[i][j] = 1;
+				mudaVez();
+			}
+		}
+		else if(tab==2) {
+			if(vez == 2) {
+				campoJog2[i][j] = 1;
+				mudaVez();
+			}
+		}
+	}
 }
