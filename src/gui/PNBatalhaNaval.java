@@ -79,7 +79,7 @@ public class PNBatalhaNaval extends JPanel implements MouseListener {
 				g2d.fill(rt);
 				if(campoJog2[j][i] == 1) g2d.setPaint(Color.red);
 				else g2d.setPaint(Color.cyan);
-				rt=new Rectangle2D.Double(tab2[i][j].x, tab2[i][j].y, tab2[i][j].larg, tab2[i][j].larg);
+				rt=new Rectangle2D.Double(tab2[i][j].x, tab2[i][j].y, tab2[i][j].alt, tab2[i][j].larg);
 				g2d.fill(rt);
 			}
 		}
