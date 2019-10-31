@@ -17,9 +17,4 @@ public class FRBatalhaNaval extends JFrame {
 		getContentPane().add(new PNBatalhaNaval(c));
 		setTitle("Batalha Naval");
 	}
-	
-	public static void main(String args[]) {
-		
-		(new FRBatalhaNaval(new CtrlRegras())).setVisible(true);
-	}
 }

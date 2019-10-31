@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.geom.*;
 import java.awt.geom.Line2D.Double;
 import java.awt.event.*;
+import tratadores.*;
 import regras.*;
  
 public class PNBatalhaNaval extends JPanel implements MouseListener {
@@ -103,22 +104,7 @@ public class PNBatalhaNaval extends JPanel implements MouseListener {
 	}
 	
 	public void mouseClicked(MouseEvent e) {
-		int x=e.getX(),y=e.getY();
-		if(x < xFim && x > xIni && y < yFim && y > yIni) {
-			x = (int)(((double) x - xIni) / larg);
-			y = (int)(((double) y - yIni) / alt);
-			JOptionPane.showMessageDialog(this, "Vez " + ctrl.getVez() + " Tabuleiro 1   x=" + x + " y=" + y);
-			ctrl.atira(1, x, y);
-			
-		}
-		else if (x < xFim2 && x > xIni2 && y < yFim2 && y > yIni2) {
-			x = (int)(((double) x - xIni2) / larg);
-			y = (int)(((double) y - yIni2) / alt);
-			JOptionPane.showMessageDialog(this, "Vez " + ctrl.getVez() + " Tabuleiro 2   x=" + x + " y=" + y);
-			ctrl.atira(2, x, y);
-		}
-//		else if(x < xFim2 && x > xIni2 && y < yFim2 && y > yIni2);
-		System.out.print("Mouse Clicado");
+		MouseClicado(e);
 		repaint();
 	}
 	
