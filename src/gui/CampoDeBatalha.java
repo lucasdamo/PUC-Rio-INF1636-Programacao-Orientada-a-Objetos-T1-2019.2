@@ -10,20 +10,22 @@ import regras.*;
 
 
 public class CampoDeBatalha extends JPanel {
+	int campoJog[][];
 	Celula tab[][] = new Celula[15][15];
 	double xIni, yIni, xFim, yFim;
 	double alt, larg;
 	Line2D.Double lnX[] = new Line2D.Double[16];
 	Line2D.Double lnY[] = new Line2D.Double[16];
-	public CampoDeBatalha(double xIni, double yIni, double xFim, double yFim) {
+	public CampoDeBatalha(double xIni, double yIni, double xFim, double yFim, int campoJog[][]) {
 		double x, y;
-		y = yIni;
+		this.campoJog = campoJog;
 		this.xIni = xIni;
 		this.yIni = yIni;
 		this.xFim = xFim;
 		this.yFim = yFim;
 		this.alt = (yFim - yIni) / 15;
 		this.larg = (xFim - xIni)/15;
+		y = yIni;
 		for(int i =0; i<15; i++) {
 			// Para cada linha
 			x = xIni;
@@ -48,7 +50,7 @@ public class CampoDeBatalha extends JPanel {
 		}
 	}
 	
-	public void paintComponent(Graphics g, int campoJog[][]) {
+	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2d=(Graphics2D) g;
 		Rectangle2D rt;
