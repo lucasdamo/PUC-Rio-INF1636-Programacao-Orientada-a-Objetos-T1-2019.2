@@ -12,19 +12,23 @@ import regras.*;
 public class CampoDeBatalha extends JPanel {
 	int campoJog[][];
 	Celula tab[][] = new Celula[15][15];
-	double xIni, yIni, xFim, yFim;
-	double alt, larg;
 	Line2D.Double lnX[] = new Line2D.Double[16];
 	Line2D.Double lnY[] = new Line2D.Double[16];
-	public CampoDeBatalha(double xIni, double yIni, double xFim, double yFim, int campoJog[][]) {
+	double xIni, yIni, larg, alt, xFim, yFim;
+	public CampoDeBatalha(double xInicial, double yInicial, double largura, double altura, int campoJog[][]) {
 		double x, y;
+		this.alt = altura;
+		this.larg = largura;
+		this.setLayout(null);
+		this.setBounds( (int) xInicial, (int) yInicial, (int) largura + 1, (int) altura + 1); // +1 para incluir as ultimas linhas horizontal e vertical
 		this.campoJog = campoJog;
-		this.xIni = xIni;
-		this.yIni = yIni;
-		this.xFim = xFim;
-		this.yFim = yFim;
-		this.alt = (yFim - yIni) / 15;
-		this.larg = (xFim - xIni)/15;
+		xIni = 0; 
+		yIni = 0;
+		xFim = larg;
+		yFim = alt;
+		alt = alt/15;
+		larg = larg/15;
+	
 		y = yIni;
 		for(int i =0; i<15; i++) {
 			// Para cada linha
@@ -32,7 +36,8 @@ public class CampoDeBatalha extends JPanel {
 			for(int j=0; j<15; j++) {
 				// Em cada coluna
 				tab[i][j] = new Celula(x, y, larg, alt);
-				x=larg;
+				x+=larg;
+				
 			}
 			y+=alt;
 		}
@@ -40,6 +45,7 @@ public class CampoDeBatalha extends JPanel {
 		// Cria as linhas horizontais
 		for(int i = 0; i<16; i++) {
 			lnY[i] = new Line2D.Double(xIni,y,xFim,y);
+			System.out.print("Y linha =" + y + "\n");
 			y+=alt;
 		}
 		x = xIni;
@@ -58,7 +64,7 @@ public class CampoDeBatalha extends JPanel {
 			for(int j=0;j<15;j++) {
 				if(campoJog[j][i] == 1) g2d.setPaint(Color.red);
 				else g2d.setPaint(Color.cyan);
-				rt=new Rectangle2D.Double(tab[i][j].x, tab[i][j].y, tab[i][j].alt, tab[i][j].larg);
+				rt=new Rectangle2D.Double(tab[i][j].x, tab[i][j].y, tab[i][j].larg, tab[i][j].alt);
 				//System.out.print("Rectangle2D.Double("+tab1[i][j].x+", "+tab1[i][j].y + ", "+tab1[i][j].larg + ", " + tab1[i][j].alt +");\n");
 				g2d.fill(rt);
 			}

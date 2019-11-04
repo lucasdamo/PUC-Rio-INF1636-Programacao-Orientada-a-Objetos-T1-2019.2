@@ -7,7 +7,7 @@ import javax.swing.*;
 
 public class FRBatalhaNaval extends JFrame {
 	
-	public FRBatalhaNaval(CtrlRegras c) {
+	public FRBatalhaNaval(Facade f) {
 		CampoDeBatalha tabEsq;
 		CampoDeBatalha tabDir;
 		Toolkit tk=Toolkit.getDefaultToolkit();
@@ -15,9 +15,11 @@ public class FRBatalhaNaval extends JFrame {
 		double wid = screenSize.getWidth(), hei = screenSize.getHeight();
 		setBounds(0,0,(int)wid,(int)hei);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		tabEsq = new CampoDeBatalha(50,50, (wid/2) - 50, hei - 3 * 50, c.getTab1());
-		tabDir = new CampoDeBatalha(wid/2 + 50, 50, wid - 50, hei - 3 * 50, c.getTab2());
-		getContentPane().add(new PNBatalhaNaval(c));
+		this.setLayout(null);
+		tabEsq = new CampoDeBatalha(0, 20, (wid/3), 2*hei/3, f.getTab1());
+		tabDir = new CampoDeBatalha(wid/2, 20, (wid/3), 2*hei/3, f.getTab2());
+		getContentPane().add(tabEsq);
+		getContentPane().add(tabDir);
 		setTitle("Batalha Naval");
 	}
 }

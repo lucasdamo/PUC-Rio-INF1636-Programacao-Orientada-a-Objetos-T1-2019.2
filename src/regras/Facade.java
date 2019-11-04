@@ -14,4 +14,12 @@ public class Facade {
 		}
 		return f;
 	}
+	
+	public int[][] getTab1(){
+		return ctrl.getTab1();
+	}
+	
+	public int[][] getTab2(){
+		return ctrl.getTab2();
+	}
 }
