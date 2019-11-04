@@ -29,14 +29,14 @@ public class CtrlRegras {
 		if(vez == 1) vez = 2;
 		else vez = 1;
 	}
-	public void atira(int tab, int i, int j) {
-		if(tab == 1) {
+	public void atira(int i, int j, int jog) {
+		if(jog == 1) {
 			if(vez == 1) {
 				campoJog1[i][j] = 1;
 				mudaVez();
 			}
 		}
-		else if(tab==2) {
+		else if(jog==2) {
 			if(vez == 2) {
 				campoJog2[i][j] = 1;
 				mudaVez();

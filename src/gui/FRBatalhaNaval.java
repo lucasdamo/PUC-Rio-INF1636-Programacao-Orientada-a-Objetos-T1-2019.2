@@ -16,8 +16,8 @@ public class FRBatalhaNaval extends JFrame {
 		setBounds(0,0,(int)wid,(int)hei);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setLayout(null);
-		tabEsq = new CampoDeBatalha(0, 20, (wid/3), 2*hei/3, f.getTab1());
-		tabDir = new CampoDeBatalha(wid/2, 20, (wid/3), 2*hei/3, f.getTab2());
+		tabEsq = new CampoDeBatalha(0, 20, (wid/3), 2*hei/3, 1);
+		tabDir = new CampoDeBatalha(wid/2, 20, (wid/3), 2*hei/3, 2);
 		getContentPane().add(tabEsq);
 		getContentPane().add(tabDir);
 		setTitle("Batalha Naval");

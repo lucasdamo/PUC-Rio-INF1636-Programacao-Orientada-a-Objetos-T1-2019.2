@@ -9,26 +9,27 @@ import tratadores.*;
 import regras.*;
 
 
-public class CampoDeBatalha extends JPanel {
-	int campoJog[][];
+public class CampoDeBatalha extends JPanel implements MouseListener {
+	int jog;
 	Celula tab[][] = new Celula[15][15];
 	Line2D.Double lnX[] = new Line2D.Double[16];
 	Line2D.Double lnY[] = new Line2D.Double[16];
 	double xIni, yIni, larg, alt, xFim, yFim;
-	public CampoDeBatalha(double xInicial, double yInicial, double largura, double altura, int campoJog[][]) {
+	Facade f = Facade.getFacade();
+	public CampoDeBatalha(double xInicial, double yInicial, double largura, double altura, int jog) {
 		double x, y;
 		this.alt = altura;
 		this.larg = largura;
 		this.setLayout(null);
 		this.setBounds( (int) xInicial, (int) yInicial, (int) largura + 1, (int) altura + 1); // +1 para incluir as ultimas linhas horizontal e vertical
-		this.campoJog = campoJog;
+		this.jog = jog;
 		xIni = 0; 
 		yIni = 0;
 		xFim = larg;
 		yFim = alt;
 		alt = alt/15;
 		larg = larg/15;
-	
+		addMouseListener(this);
 		y = yIni;
 		for(int i =0; i<15; i++) {
 			// Para cada linha
@@ -45,7 +46,6 @@ public class CampoDeBatalha extends JPanel {
 		// Cria as linhas horizontais
 		for(int i = 0; i<16; i++) {
 			lnY[i] = new Line2D.Double(xIni,y,xFim,y);
-			System.out.print("Y linha =" + y + "\n");
 			y+=alt;
 		}
 		x = xIni;
@@ -60,6 +60,13 @@ public class CampoDeBatalha extends JPanel {
 		super.paintComponent(g);
 		Graphics2D g2d=(Graphics2D) g;
 		Rectangle2D rt;
+		int campoJog[][];
+		if(jog == 1) {
+			campoJog = f.getTab1();
+		}
+		else {
+			campoJog = f.getTab2();
+		}
 		for(int i=0;i<15;i++) {
 			for(int j=0;j<15;j++) {
 				if(campoJog[j][i] == 1) g2d.setPaint(Color.red);
@@ -81,6 +88,19 @@ public class CampoDeBatalha extends JPanel {
 			g2d.drawString(write, (float) ( tab[0][i].x + larg/2 ), (float) ( yIni - alt/2 ) );
 			g2d.drawString(write, (float) ( xIni - larg/2 ), (float) (tab[i][0].y + alt/2));;
 		}
-		
 	}
+	
+	public void mouseClicked(MouseEvent e) { 
+		int x=e.getX(),y=e.getY();
+		System.out.print("Mouse Clicado x=" + x + " y=" + y + "\n");
+		x = (int)( (double) x / larg);
+		y = (int)( (double) y / alt);
+		f.atira(x, y, jog);
+		repaint();
+	}
+	
+	public void mouseEntered(MouseEvent e) {}
+	public void mousePressed(MouseEvent e) {}
+	public void mouseReleased(MouseEvent e) {}
+	public void mouseExited(MouseEvent e) {}
 }

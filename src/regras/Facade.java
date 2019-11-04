@@ -22,4 +22,8 @@ public class Facade {
 	public int[][] getTab2(){
 		return ctrl.getTab2();
 	}
+	
+	public void atira(int x, int y, int jog) {
+		ctrl.atira(x, y, jog);
+	}
 }
