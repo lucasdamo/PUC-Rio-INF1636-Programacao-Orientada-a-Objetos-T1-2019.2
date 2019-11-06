@@ -5,17 +5,24 @@ import java.awt.*;
 import java.awt.geom.*;
 import java.awt.geom.Line2D.Double;
 import java.awt.event.*;
+import java.util.*;
+import java.util.List;
+
 import tratadores.*;
 import regras.*;
+import observador.Observable;
+import observador.Observer;
 
 
-public class CampoDeBatalha extends JPanel implements MouseListener {
+public class CampoDeBatalha extends JPanel implements MouseListener, Observable {
 	int jog;
 	Celula tab[][] = new Celula[15][15];
 	Line2D.Double lnX[] = new Line2D.Double[16];
 	Line2D.Double lnY[] = new Line2D.Double[16];
 	double xIni, yIni, larg, alt, xFim, yFim;
 	Facade f = Facade.getFacade();
+	List<Observer> lob=new ArrayList<Observer>();
+	int ClickedCelX, ClickedCelY;
 	public CampoDeBatalha(double xInicial, double yInicial, double largura, double altura, int jog) {
 		double x, y;
 		this.alt = altura;
@@ -90,13 +97,36 @@ public class CampoDeBatalha extends JPanel implements MouseListener {
 		}
 	}
 	
+	public void addObserver(Observer o) {
+		// TODO Auto-generated method stub
+		lob.add(o);
+	}
+
+	public void removeObserver(Observer o) {
+		// TODO Auto-generated method stub
+		lob.remove(o);
+	}
+
+	public Object get() {
+		// TODO Auto-generated method stub
+		
+		return null;
+	}
+	
+	public int[] getCoordenadasClick(){
+		int[] retorno = {this.ClickedCelX, this.ClickedCelY, this.jog};
+		return retorno;
+	}
+	
 	public void mouseClicked(MouseEvent e) { 
 		int x=e.getX(),y=e.getY();
 		System.out.print("Mouse Clicado x=" + x + " y=" + y + "\n");
 		x = (int)( (double) x / larg);
 		y = (int)( (double) y / alt);
-		f.atira(x, y, jog);
-		repaint();
+		this.ClickedCelX = x;
+		this.ClickedCelY = y;
+		for(Observer o:lob)
+			o.notify(this);
 	}
 	
 	public void mouseEntered(MouseEvent e) {}
