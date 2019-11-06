@@ -30,7 +30,7 @@ public class CtrlRegras {
 		else vez = 1;
 	}
 	public void atira(int i, int j, int jog) {
-		System.out.print(i + " " + j + " " + jog + "\n");
+		//System.out.print(i + " " + j + " " + jog + "\n");
 		if(jog == 1) {
 			if(vez == 1) {
 				campoJog1[i][j] = 1;

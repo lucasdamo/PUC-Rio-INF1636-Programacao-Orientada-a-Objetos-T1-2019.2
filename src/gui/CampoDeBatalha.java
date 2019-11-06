@@ -129,6 +129,10 @@ public class CampoDeBatalha extends JPanel implements MouseListener, Observable 
 			o.notify(this);
 	}
 	
+	public int tipo() {
+		return 1;
+	}
+	
 	public void mouseEntered(MouseEvent e) {}
 	public void mousePressed(MouseEvent e) {}
 	public void mouseReleased(MouseEvent e) {}

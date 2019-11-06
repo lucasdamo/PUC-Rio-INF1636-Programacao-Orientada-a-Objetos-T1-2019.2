@@ -29,12 +29,16 @@ public class FRBatalhaNaval extends JFrame implements Observer {
 	}
 	
 	public void notify(Observable o) {
-		int[] coord;
-		CampoDeBatalha cp;
-		cp = (CampoDeBatalha)(o);
-		System.out.print("Notified!\n");
-		coord = (int[]) cp.getCoordenadasClick();
-		facade.atira(coord[0], coord[1], coord[2]);
-		cp.repaint();
+		if(o.tipo() == 1) {
+			int[] coord;
+			CampoDeBatalha cp;
+			cp = (CampoDeBatalha)(o);
+			coord = (int[]) cp.getCoordenadasClick();
+			facade.atira(coord[0], coord[1], coord[2]);
+			cp.repaint();
+		}
+		else {
+			System.out.print("Tipo do observable não reconhecido\n");
+		}
 	}
 }

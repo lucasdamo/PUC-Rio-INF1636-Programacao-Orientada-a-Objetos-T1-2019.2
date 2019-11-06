@@ -1,13 +1,15 @@
 package controladores;
 
-import gui.FRBatalhaNaval;
+import gui.*;
 import regras.*;
 
 
 public class MainController {
 
 	public static void main(String[] args) {
-		(new FRBatalhaNaval(Facade.getFacade())).setVisible(true);
+		Facade f = Facade.getFacade();
+		(new FRMenuInicial()).setVisible(true);
+		//(new FRBatalhaNaval(f)).setVisible(true);
 	}
 
 }
