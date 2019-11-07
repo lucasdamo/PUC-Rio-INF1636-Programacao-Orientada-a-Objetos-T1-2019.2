@@ -3,13 +3,20 @@ package gui;
 import regras.*;
 
 import java.awt.*;
+import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.*;
+
+import controladores.MainController;
 import observador.Observable;
 import observador.Observer;
 
 
 
 public class FRMenuInicial extends JFrame {
+	Facade f = Facade.getFacade();
 	public FRMenuInicial() {
 		JLabel labelNomeJog1 = new JLabel("Nome do jogador 1");
 		JLabel labelNomeJog2 = new JLabel("Nome do jogador 2");
@@ -32,6 +39,22 @@ public class FRMenuInicial extends JFrame {
 		getContentPane().add(inputNomeJog1);
 		getContentPane().add(inputNomeJog2);
 		getContentPane().add(butaoInicia);
+		butaoInicia.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	if(inputNomeJog1.getText().matches("([A-Z]*)([a-z ])*") && inputNomeJog2.getText().matches("([A-Z]*)([a-z ])*")) {
+            		if(inputNomeJog1.getText().equals(inputNomeJog2.getText())) {
+            			JOptionPane.showMessageDialog(null, "Por favor insira nomes diferentes");
+            		}
+            		else {
+            			
+                        MainController.getControl().nextEstado();
+            		}
+            	}
+            	else {
+            		JOptionPane.showMessageDialog(null, "Por favor insira nomes sem acentos e caracteres especiais");
+            	}
+            }
+        });
 		setTitle("Batalha Naval");
 	}
 }

@@ -8,6 +8,7 @@ public class CtrlRegras {
 	int campoJog1[][] = new int[15][15];
 	int campoJog2[][] = new int[15][15];
 	int vez;
+	Jogador [] jogadores = new Jogador[2];
 	String nomeJog1, nomeJog2;
 	List<Observer> lob=new ArrayList<Observer>();
 	public CtrlRegras() {
@@ -48,16 +49,8 @@ public class CtrlRegras {
 			}
 		}
 	}
-	public void setNomeJog1(String inputNome) {
-		this.nomeJog1 = inputNome;
-	}
-	public void setNomeJog2(String inputNome) {
-		this.nomeJog2 = inputNome;
-	}
-	public String getNomeJog1(String inputNome) {
-		return this.nomeJog1;
-	}
-	public String getNomeJog2(String inputNome) {
-		return this.nomeJog2;
+	public void createJogadores(String nome1, String nome2) {
+		this.jogadores[0] = new Jogador(nome1, 1);
+		this.jogadores[1] = new Jogador(nome2, 2);
 	}
 }

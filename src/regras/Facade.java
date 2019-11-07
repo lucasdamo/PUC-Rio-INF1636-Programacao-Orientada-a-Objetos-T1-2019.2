@@ -49,4 +49,7 @@ public class Facade implements Observable{
 		for(Observer o:lob)
 			o.notify(this);
 	}
+	public void createJogadores(String nomeJog1, String nomeJog2) {
+		ctrl.createJogadores(nomeJog1, nomeJog2);
+	}
 }

@@ -11,26 +11,36 @@ public class MainController implements Observer {
 	EstadoJogo estadoAtual;
 	Facade f = Facade.getFacade();
 	JFrame frameAtual;
-	
+	static MainController mainControl = null;
 	public MainController() {
+		MainController.setControl(this);
 		this.estadoAtual = estadoAtual.Inicio;
 		executaEstadoAtual();
 	}
-
-	private void nextEstado() {
+	
+	private static void setControl(MainController mc) {
+		mainControl = mc;
+	}
+	
+	public static MainController getControl() {
+		return mainControl;
+	}
+	
+	public void nextEstado() {
+		System.out.print("NEXT ESTADO\n");
 		int index = estadoAtual.ordinal();
 		int nextIndex = index + 1;
 		EstadoJogo[] estados = EstadoJogo.values();
 		nextIndex %= estados.length;
 		estadoAtual = estados[nextIndex];
+		executaEstadoAtual();
 	}
 	
 	public void notify(Observable o) {
 		nextEstado();
-		executaEstadoAtual();
 	}
 	
-	public void executaEstadoAtual() {
+	private void executaEstadoAtual() {
 		if(frameAtual != null)frameAtual.setVisible(false);
 		switch(estadoAtual) {
 			case Inicio:
