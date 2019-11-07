@@ -25,6 +25,8 @@ public class FRBatalhaNaval extends JFrame implements Observer {
 		tabDir.addObserver(this);
 		getContentPane().add(tabEsq);
 		getContentPane().add(tabDir);
+		facade.addObserver(tabEsq);
+		facade.addObserver(tabDir);
 		setTitle("Batalha Naval");
 	}
 	
@@ -35,7 +37,6 @@ public class FRBatalhaNaval extends JFrame implements Observer {
 			cp = (CampoDeBatalha)(o);
 			coord = (int[]) cp.getCoordenadasClick();
 			facade.atira(coord[0], coord[1], coord[2]);
-			cp.repaint();
 		}
 		else {
 			System.out.print("Tipo do observable não reconhecido\n");

@@ -1,9 +1,15 @@
 package regras;
 
-public class Facade {
+import java.util.ArrayList;
+import java.util.List;
+
+import observador.Observable;
+import observador.Observer;
+
+public class Facade implements Observable{
 	CtrlRegras ctrl;
 	static Facade f = null;
-	
+	List<Observer> lob=new ArrayList<Observer>();
 	public Facade() {
 		ctrl = new CtrlRegras();
 	}
@@ -25,5 +31,22 @@ public class Facade {
 	
 	public void atira(int x, int y, int jog) {
 		ctrl.atira(x, y, jog);
+		notifyObservers();
+	}
+	public void addObserver(Observer o) {
+		lob.add(o);
+	}
+	public void removeObserver(Observer o) {
+		lob.remove(o);
+	}
+	public Object get() {
+		return this;
+	}
+	public int tipo() {
+		return 0;
+	}
+	private void notifyObservers() {
+		for(Observer o:lob)
+			o.notify(this);
 	}
 }

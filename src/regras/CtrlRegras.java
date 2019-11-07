@@ -1,11 +1,15 @@
 package regras;
 
-import java.util.Arrays;
+import java.util.*;
+import observador.Observable;
+import observador.Observer;
 
 public class CtrlRegras {
 	int campoJog1[][] = new int[15][15];
 	int campoJog2[][] = new int[15][15];
 	int vez;
+	String nomeJog1, nomeJog2;
+	List<Observer> lob=new ArrayList<Observer>();
 	public CtrlRegras() {
 		vez = 1;
 		for(int i = 0; i<15; i++) {
@@ -43,5 +47,17 @@ public class CtrlRegras {
 				mudaVez();
 			}
 		}
+	}
+	public void setNomeJog1(String inputNome) {
+		this.nomeJog1 = inputNome;
+	}
+	public void setNomeJog2(String inputNome) {
+		this.nomeJog2 = inputNome;
+	}
+	public String getNomeJog1(String inputNome) {
+		return this.nomeJog1;
+	}
+	public String getNomeJog2(String inputNome) {
+		return this.nomeJog2;
 	}
 }

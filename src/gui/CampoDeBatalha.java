@@ -14,7 +14,7 @@ import observador.Observable;
 import observador.Observer;
 
 
-public class CampoDeBatalha extends JPanel implements MouseListener, Observable {
+public class CampoDeBatalha extends JPanel implements MouseListener, Observable, Observer {
 	int jog;
 	Celula tab[][] = new Celula[15][15];
 	Line2D.Double lnX[] = new Line2D.Double[16];
@@ -98,18 +98,14 @@ public class CampoDeBatalha extends JPanel implements MouseListener, Observable 
 	}
 	
 	public void addObserver(Observer o) {
-		// TODO Auto-generated method stub
 		lob.add(o);
 	}
 
 	public void removeObserver(Observer o) {
-		// TODO Auto-generated method stub
 		lob.remove(o);
 	}
 
-	public Object get() {
-		// TODO Auto-generated method stub
-		
+	public Object get() {		
 		return null;
 	}
 	
@@ -137,4 +133,11 @@ public class CampoDeBatalha extends JPanel implements MouseListener, Observable 
 	public void mousePressed(MouseEvent e) {}
 	public void mouseReleased(MouseEvent e) {}
 	public void mouseExited(MouseEvent e) {}
+
+	public void notify(Observable o) {
+		if (o.tipo() == 0) {
+			// Objeto do tipo Facade
+			this.repaint();
+		}
+	}
 }
