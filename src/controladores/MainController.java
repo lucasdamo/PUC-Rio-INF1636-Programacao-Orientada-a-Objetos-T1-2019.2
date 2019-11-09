@@ -48,6 +48,7 @@ public class MainController implements Observer {
 				break;
 			case PosicionamentoArmas:
 				frameAtual = new FRPosicionamento();
+				break;
 			case Batalha:
 				frameAtual = new FRBatalhaNaval(f);
 				break;

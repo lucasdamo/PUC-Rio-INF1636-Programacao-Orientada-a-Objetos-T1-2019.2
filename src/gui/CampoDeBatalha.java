@@ -12,17 +12,17 @@ import tratadores.*;
 import regras.*;
 import observador.Observable;
 import observador.Observer;
+import observador.*;
 
 
-public class CampoDeBatalha extends JPanel implements MouseListener, Observable, Observer {
+public class CampoDeBatalha extends JPanel implements MouseListener, AvisaCliqueCampoBatalha, Observer {
 	int jog;
 	Celula tab[][] = new Celula[15][15];
 	Line2D.Double lnX[] = new Line2D.Double[16];
 	Line2D.Double lnY[] = new Line2D.Double[16];
 	double xIni, yIni, larg, alt, xFim, yFim;
 	Facade f = Facade.getFacade();
-	List<Observer> lob=new ArrayList<Observer>();
-	int ClickedCelX, ClickedCelY;
+	List<EscutaCliqueCampoBatalha> lob=new ArrayList<EscutaCliqueCampoBatalha>();
 	public CampoDeBatalha(double xInicial, double yInicial, double largura, double altura, int jog) {
 		double x, y;
 		this.alt = altura;
@@ -97,32 +97,12 @@ public class CampoDeBatalha extends JPanel implements MouseListener, Observable,
 		}
 	}
 	
-	public void addObserver(Observer o) {
-		lob.add(o);
-	}
-
-	public void removeObserver(Observer o) {
-		lob.remove(o);
-	}
-
-	public Object get() {		
-		return null;
-	}
-	
-	public int[] getCoordenadasClick(){
-		int[] retorno = {this.ClickedCelX, this.ClickedCelY, this.jog};
-		return retorno;
-	}
-	
 	public void mouseClicked(MouseEvent e) { 
 		int x=e.getX(),y=e.getY();
 		System.out.print("Mouse Clicado x=" + x + " y=" + y + "\n");
 		x = (int)( (double) x / larg);
 		y = (int)( (double) y / alt);
-		this.ClickedCelX = x;
-		this.ClickedCelY = y;
-		for(Observer o:lob)
-			o.notify(this);
+		avisaCliqueObservadores(x, y, this.jog);
 	}
 	
 	public int tipo() {
@@ -134,10 +114,20 @@ public class CampoDeBatalha extends JPanel implements MouseListener, Observable,
 	public void mouseReleased(MouseEvent e) {}
 	public void mouseExited(MouseEvent e) {}
 
+	public void addCliqueListener(EscutaCliqueCampoBatalha o) {
+		lob.add(o);
+	}
+
+	public void removeCliqueListener(EscutaCliqueCampoBatalha o) {
+		lob.remove(o);
+	}
+
+	public void avisaCliqueObservadores(int x, int y, int jogador) {
+		for(EscutaCliqueCampoBatalha o:lob)
+			o.recebeClique(x, y, jogador);
+	}
+
 	public void notify(Observable o) {
-		if (o.tipo() == 0) {
-			// Objeto do tipo Facade
-			this.repaint();
-		}
+		repaint();
 	}
 }

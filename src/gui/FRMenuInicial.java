@@ -46,7 +46,6 @@ public class FRMenuInicial extends JFrame {
             			JOptionPane.showMessageDialog(null, "Por favor insira nomes diferentes");
             		}
             		else {
-            			
                         MainController.getControl().nextEstado();
             		}
             	}

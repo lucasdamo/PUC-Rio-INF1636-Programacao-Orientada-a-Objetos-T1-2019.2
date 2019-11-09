@@ -4,10 +4,9 @@ import regras.*;
 
 import java.awt.*;
 import javax.swing.*;
-import observador.Observable;
-import observador.Observer;
+import observador.*;
 
-public class FRBatalhaNaval extends JFrame implements Observer {
+public class FRBatalhaNaval extends JFrame implements EscutaCliqueCampoBatalha {
 	Facade facade;
 	public FRBatalhaNaval(Facade f) {
 		CampoDeBatalha tabEsq;
@@ -21,8 +20,8 @@ public class FRBatalhaNaval extends JFrame implements Observer {
 		this.setLayout(null);
 		tabEsq = new CampoDeBatalha(0, 20, (wid/3), 2*hei/3, 1);
 		tabDir = new CampoDeBatalha(wid/2, 20, (wid/3), 2*hei/3, 2);
-		tabEsq.addObserver(this);
-		tabDir.addObserver(this);
+		tabEsq.addCliqueListener(this);
+		tabDir.addCliqueListener(this);
 		getContentPane().add(tabEsq);
 		getContentPane().add(tabDir);
 		facade.addObserver(tabEsq);
@@ -30,16 +29,7 @@ public class FRBatalhaNaval extends JFrame implements Observer {
 		setTitle("Batalha Naval");
 	}
 	
-	public void notify(Observable o) {
-		if(o.tipo() == 1) {
-			int[] coord;
-			CampoDeBatalha cp;
-			cp = (CampoDeBatalha)(o);
-			coord = (int[]) cp.getCoordenadasClick();
-			facade.atira(coord[0], coord[1], coord[2]);
-		}
-		else {
-			System.out.print("Tipo do observable não reconhecido\n");
-		}
+	public void recebeClique(int x, int y, int jogador) {
+		facade.atira(x, y, jogador);
 	}
 }
