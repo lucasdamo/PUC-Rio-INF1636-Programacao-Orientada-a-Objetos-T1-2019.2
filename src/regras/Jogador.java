@@ -7,4 +7,7 @@ public class Jogador {
 		this.nome = nome;
 		this.id = id;
 	}
+	public int getId() {
+		return this.id;
+	}
 }

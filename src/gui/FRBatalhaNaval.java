@@ -9,8 +9,8 @@ import observador.*;
 public class FRBatalhaNaval extends JFrame implements EscutaCliqueCampoBatalha {
 	Facade facade;
 	public FRBatalhaNaval(Facade f) {
-		CampoDeBatalha tabEsq;
-		CampoDeBatalha tabDir;
+		PNCampoDeBatalha tabEsq;
+		PNCampoDeBatalha tabDir;
 		Toolkit tk=Toolkit.getDefaultToolkit();
 		Dimension screenSize=tk.getScreenSize();
 		this.facade = f;
@@ -18,8 +18,8 @@ public class FRBatalhaNaval extends JFrame implements EscutaCliqueCampoBatalha {
 		setBounds(0,0,(int)wid,(int)hei);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setLayout(null);
-		tabEsq = new CampoDeBatalha(0, 20, (wid/3), 2*hei/3, 1);
-		tabDir = new CampoDeBatalha(wid/2, 20, (wid/3), 2*hei/3, 2);
+		tabEsq = new PNCampoDeBatalha(0, 20, (wid/3), 2*hei/3, 1);
+		tabDir = new PNCampoDeBatalha(wid/2, 20, (wid/3), 2*hei/3, 2);
 		tabEsq.addCliqueListener(this);
 		tabDir.addCliqueListener(this);
 		getContentPane().add(tabEsq);

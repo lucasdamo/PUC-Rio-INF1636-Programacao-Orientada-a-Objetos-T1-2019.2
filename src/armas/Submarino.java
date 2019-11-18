@@ -1,5 +1,5 @@
 package armas;
 
-public class Submarino {
+public class Submarino extends Arma {
 
 }

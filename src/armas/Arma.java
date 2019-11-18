@@ -19,6 +19,5 @@ public abstract class Arma extends JPanel {
 		nextIndex %= orientacoes.length;
 		rot = orientacoes[nextIndex];
 	}
-	public abstract void posiciona(int x, int y);
 	public abstract void desenha();
 }

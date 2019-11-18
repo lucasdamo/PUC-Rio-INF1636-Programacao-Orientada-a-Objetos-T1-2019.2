@@ -6,7 +6,9 @@ import java.util.List;
 import observador.Observable;
 import observador.Observer;
 
-public class Facade implements Observable{
+import tratadores.*;
+
+public class Facade implements Observable {
 	CtrlRegras ctrl;
 	static Facade f = null;
 	List<Observer> lob=new ArrayList<Observer>();
@@ -51,5 +53,16 @@ public class Facade implements Observable{
 	}
 	public void createJogadores(String nomeJog1, String nomeJog2) {
 		ctrl.createJogadores(nomeJog1, nomeJog2);
+	}
+	public int[][] getTabJogador(Jogador jog) throws ErroAoIdentificarJogador {
+		if(jog.getId() == 1) {
+			return ctrl.getTab1();
+		}
+		else if (jog.getId() == 2) {
+			return ctrl.getTab2();
+		}
+		else {
+			throw new ErroAoIdentificarJogador();
+		}
 	}
 }

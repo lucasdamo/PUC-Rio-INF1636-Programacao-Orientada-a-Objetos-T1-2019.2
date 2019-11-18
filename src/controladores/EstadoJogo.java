@@ -2,7 +2,8 @@ package controladores;
 
 public enum EstadoJogo {
 	Inicio,
-	PosicionamentoArmas,
+	PosicionamentoArmasJog1,
+	PosicionamentoArmasJog2,
 	Batalha,
 	ResumoDaBatalha,
 }
