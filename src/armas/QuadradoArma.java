@@ -9,8 +9,8 @@ import java.util.List;
 import controladores.EstadoJogo;
 
 public class QuadradoArma extends JPanel {
-	private int tamX = 10;
-	private int tamY = 5;
+	private int tamX = 100;
+	private int tamY = 50;
 	private Color cor;
 	public int getLargura() {
 		return tamX;
@@ -21,7 +21,7 @@ public class QuadradoArma extends JPanel {
 	public void setCor(Color cor) {
 		this.cor = cor;
 	}
-	public void desenha(Graphics g) {
+	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2d=(Graphics2D) g;
 		Rectangle2D rt;

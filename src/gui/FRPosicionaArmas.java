@@ -1,6 +1,7 @@
 package gui;
 
 import javax.swing.*;
+import armas.*;
 
 import java.awt.*;
 import java.awt.geom.*;
@@ -27,6 +28,9 @@ public class FRPosicionaArmas extends JFrame implements EscutaCliqueCampoBatalha
 		campoDeBatalha.addCliqueListener(this);
 		getContentPane().add(campoDeBatalha);
 		setTitle("Batalha Naval");
+		Submarino sub1 = new Submarino();
+		sub1.setBounds(10, 10, 100, 100);
+		getContentPane().add(sub1);
 	}
 	public void recebeClique(int x, int y, int jogador) {
 		/* Recebe clique no campo de batalha */
