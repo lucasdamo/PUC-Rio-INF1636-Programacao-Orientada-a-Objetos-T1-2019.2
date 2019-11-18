@@ -12,12 +12,11 @@ import controladores.EstadoJogo;
 public abstract class Arma extends JPanel {
 	private Rotacao rot = Rotacao.ZeroGraus;
 	public void rotate() {
-		System.out.print("NEXT ESTADO\n");
 		int index = rot.ordinal();
 		int nextIndex = index + 1;
 		Rotacao[] orientacoes = Rotacao.values();
 		nextIndex %= orientacoes.length;
 		rot = orientacoes[nextIndex];
 	}
-	public abstract void desenha();
+	public abstract void paintComponent(Graphics g);
 }
