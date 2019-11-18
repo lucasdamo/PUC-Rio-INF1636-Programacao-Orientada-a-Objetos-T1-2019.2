@@ -47,10 +47,10 @@ public class MainController implements Observer {
 				frameAtual = new FRMenuInicial();
 				break;
 			case PosicionamentoArmasJog1:
-				frameAtual = new FRPosicionaArmas(f);
+				frameAtual = new FRPosicionaArmas(f, f.getJogador1());
 				break;
 			case PosicionamentoArmasJog2:
-				frameAtual = new FRPosicionaArmas(f);
+				frameAtual = new FRPosicionaArmas(f, f.getJogador2());
 				break;
 			case Batalha:
 				frameAtual = new FRBatalhaNaval(f);

@@ -62,7 +62,15 @@ public class Facade implements Observable {
 			return ctrl.getTab2();
 		}
 		else {
-			throw new ErroAoIdentificarJogador();
+			throw new ErroAoIdentificarJogador("Id do jogador <" + jog.getNome() + "> não é 1 nem 2");
 		}
 	}
+	public Jogador getJogador1() {
+		return ctrl.getJogador1();
+	}
+	public Jogador getJogador2() {
+		return ctrl.getJogador2();
+	}
+	
+	
 }

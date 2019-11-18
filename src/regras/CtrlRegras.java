@@ -53,4 +53,10 @@ public class CtrlRegras {
 		this.jogadores[0] = new Jogador(nome1, 1);
 		this.jogadores[1] = new Jogador(nome2, 2);
 	}
+	public Jogador getJogador1() {
+		return jogadores[0];
+	}
+	public Jogador getJogador2() {
+		return jogadores[1];
+	}
 }
