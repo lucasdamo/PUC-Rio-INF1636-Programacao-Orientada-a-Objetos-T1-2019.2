@@ -15,7 +15,7 @@ import observador.Observer;
 import observador.*;
 
 
-public class CampoDeBatalha extends JPanel implements MouseListener, AvisaCliqueCampoBatalha, Observer {
+public class PNCampoDeBatalha extends JPanel implements MouseListener, AvisaCliqueCampoBatalha, Observer {
 	int jog;
 	Celula tab[][] = new Celula[15][15];
 	Line2D.Double lnX[] = new Line2D.Double[16];
@@ -23,7 +23,7 @@ public class CampoDeBatalha extends JPanel implements MouseListener, AvisaClique
 	double xIni, yIni, larg, alt, xFim, yFim;
 	Facade f = Facade.getFacade();
 	List<EscutaCliqueCampoBatalha> lob=new ArrayList<EscutaCliqueCampoBatalha>();
-	public CampoDeBatalha(double xInicial, double yInicial, double largura, double altura, int jog) {
+	public PNCampoDeBatalha(double xInicial, double yInicial, double largura, double altura, int jog) {
 		double x, y;
 		this.alt = altura;
 		this.larg = largura;
