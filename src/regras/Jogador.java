@@ -10,4 +10,7 @@ public class Jogador {
 	public int getId() {
 		return this.id;
 	}
+	public String getNome() {
+		return this.nome;
+	}
 }
