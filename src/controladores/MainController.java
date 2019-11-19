@@ -14,7 +14,7 @@ public class MainController implements Observer {
 	static MainController mainControl = null;
 	public MainController() {
 		MainController.setControl(this);
-		this.estadoAtual = estadoAtual.Batalha;
+		this.estadoAtual = estadoAtual.PosicionamentoArmasJog1;
 		executaEstadoAtual();
 	}
 	
