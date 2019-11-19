@@ -30,12 +30,12 @@ public class PNCampoDeBatalha extends JPanel implements MouseListener, AvisaCliq
 		this.setLayout(null);
 		this.setBounds( (int) xInicial, (int) yInicial, (int) largura + 1, (int) altura + 1); // +1 para incluir as ultimas linhas horizontal e vertical
 		this.jog = jog;
-		xIni = 0; 
-		yIni = 0;
+		xIni = 20; 
+		yIni = 20;
 		xFim = larg;
 		yFim = alt;
-		alt = alt/15;
-		larg = larg/15;
+		alt = (alt - yIni)/15;
+		larg = (larg - xIni)/15;
 		addMouseListener(this);
 		y = yIni;
 		for(int i =0; i<15; i++) {
@@ -90,10 +90,14 @@ public class PNCampoDeBatalha extends JPanel implements MouseListener, AvisaCliq
 			g2d.draw(lnY[i]);
 		}
 		// Desenha os indices
+		//System.out.print("\nCoordenadas Campo [" + xIni +", " + yIni + "] " + " -- [" + xIni + larg + ", " + yIni + alt + "]\n");
 		for(int i =0; i<15; i++) {
 			String write = Integer.toString(i+1);
-			g2d.drawString(write, (float) ( tab[0][i].x + larg/2 ), (float) ( yIni - alt/2 ) );
-			g2d.drawString(write, (float) ( xIni - larg/2 ), (float) (tab[i][0].y + alt/2));;
+			g2d.setPaint(Color.black);
+			g2d.drawString(write, (int) (tab[0][i].x + larg/3), (int) yIni/2); // (yIni / 2) porque 0 não exibe a string
+			g2d.drawString(write, 0, (int) (tab[i][0].y + alt/2));
+			//System.out.print("Coordenadas stringX: " + (int) (tab[0][i].x + larg/2) + ", 0\n");
+			//System.out.print("Coordenadas stringY: 0, " + (int) (tab[i][0].y + alt/2) + "\n");
 		}
 	}
 	
