@@ -9,13 +9,13 @@ import java.util.List;
 import controladores.EstadoJogo;
 
 public class QuadradoArma extends JPanel {
-	private int tamX = 100;
-	private int tamY = 50;
+	private static int tamX = 40;
+	private static int tamY = 30;
 	private Color cor;
-	public int getLargura() {
+	public static int getLargura() {
 		return tamX;
 	}
-	public int getAltura() {
+	public static int getAltura() {
 		return tamY;
 	}
 	public void setCor(Color cor) {

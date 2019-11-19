@@ -14,6 +14,7 @@ public class Submarino extends Arma {
 	
 	public Submarino() {
 		bloco1 = new QuadradoArma();
+		this.setBounds(0,0, QuadradoArma.getLargura(), QuadradoArma.getAltura());
 	}
 	public void paintComponent(Graphics g) {
 		bloco1.paintComponent(g);
