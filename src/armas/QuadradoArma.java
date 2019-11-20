@@ -13,6 +13,22 @@ public class QuadradoArma extends JPanel {
 	private static int tamY;
 	private Color cor;
 	private float opaque = (float) 0.2;
+	private int x; // Abscissa referente ao JPanel arma
+	private int y; // Ordenada referente ao JPanel arma
+	private int relX; // Abscissa referente ao campo de batalha
+	private int relY; // Ordenada referente ao campo de batalha
+	public QuadradoArma(int x, int y, int relX, int relY) {
+		this.relX = relX;
+		this.relY = relY;
+		this.x = x;
+		this.y = y;
+	}
+	public int getRelX() {
+		return relX;
+	}
+	public int getRelY() {
+		return relY;
+	}
 	public static void setLargura(int largura) {
 		tamX = largura;
 	}
@@ -41,7 +57,7 @@ public class QuadradoArma extends JPanel {
 		//g2d.setComposite(alcom);
 		
 		Rectangle2D rt;		
-		rt = new Rectangle2D.Double(0, 0, tamX, tamY);
+		rt = new Rectangle2D.Double(this.x, this.y, tamX, tamY);
 		g2d.fill(rt);
 		
 		g2d.dispose();

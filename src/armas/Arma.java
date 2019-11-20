@@ -15,20 +15,50 @@ import observador.Observer;
 public abstract class Arma extends JPanel implements MouseListener, Observable {
 	private Rotacao rot = Rotacao.ZeroGraus;
 	List<Observer> lob = new ArrayList<Observer>();
+	List<QuadradoArma> loqa = new ArrayList<QuadradoArma>();
 	Color cor;
+	int x, relX;
+	int y, relY;
 	public static Color opColor = new Color(255,51,153);
 	{
 		addMouseListener(this);
 	}
-	public void rotate() {
+	
+	public Arma(int x, int y, int relX, int relY) {
+		this.x = x;
+		this.y = y;
+		this.relX = relX;
+		this.relY = relY;
+	}
+	
+	public void changeRotatation() {
 		int index = rot.ordinal();
 		int nextIndex = index + 1;
 		Rotacao[] orientacoes = Rotacao.values();
 		nextIndex %= orientacoes.length;
 		rot = orientacoes[nextIndex];
 	}
-	public abstract void setOpaque();
-	public abstract void paintComponent(Graphics g);
+	public abstract void move(int x, int y, int relX, int relY);
+	public abstract void rotate();
+	
+	public void setOpaque() {
+		for(QuadradoArma qd : loqa) {
+			qd.setCor(opColor);
+		}
+	}
+	
+	public abstract void unOpaque();
+	
+	public void setCor(Color cor) {
+		for(QuadradoArma qd : loqa) {
+			qd.setCor(cor);
+		}
+	}
+	public void paintComponent(Graphics g) {
+		for(QuadradoArma qd : loqa) {
+			qd.paintComponent(g);
+		}
+	}
 	public void addObserver(Observer o) {
 		lob.add(o);
 	}
