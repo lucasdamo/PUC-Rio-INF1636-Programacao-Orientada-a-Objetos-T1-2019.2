@@ -12,9 +12,12 @@ import java.util.List;
 
 import regras.*;
 import observador.*;
+import observador.Observable;
+import observador.Observer;
 
-public class FRPosicionaArmas extends JFrame implements EscutaCliqueCampoBatalha {
+public class FRPosicionaArmas extends JFrame implements EscutaCliqueCampoBatalha, Observer {
 	Facade facade;
+	Arma armaSelecionada;
 	public FRPosicionaArmas(Facade f, Jogador jog) {
 		PNCampoDeBatalha campoDeBatalha;
 		Toolkit tk=Toolkit.getDefaultToolkit();
@@ -24,16 +27,27 @@ public class FRPosicionaArmas extends JFrame implements EscutaCliqueCampoBatalha
 		setBounds(0,0,(int)wid,(int)hei);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setLayout(null);
-		campoDeBatalha = new PNCampoDeBatalha(wid/2 + 10, 20, (wid/3), 2*hei/3, 1);
+		campoDeBatalha = new PNCampoDeBatalha(wid/2 + 10, 20, (wid/3), 2*hei/3);
+		campoDeBatalha.setJog(new Jogador("", 1));
 		campoDeBatalha.addCliqueListener(this);
 		getContentPane().add(campoDeBatalha);
-		setTitle("Batalha Naval");
-		Submarino sub1 = new Submarino();
+		setTitle("Posicionamento de armas para jogador");
+		QuadradoArma.setAltura(campoDeBatalha.getAlturaCelula());
+		QuadradoArma.setLargura(campoDeBatalha.getLarguraCelula());
+		Submarino sub1 = new Submarino(10, 10);
+		sub1.addObserver(this);
 		sub1.setBounds(10, 10, 100, 100);
 		getContentPane().add(sub1);
 	}
-	public void recebeClique(int x, int y, int jogador) {
+	public void recebeClique(int x, int y, Jogador jogador) {
 		/* Recebe clique no campo de batalha */
 		
+	}
+	@Override
+	public void notify(Observable o) {
+		// Arma selecionada
+		armaSelecionada = (Arma) o;
+		armaSelecionada.setOpaque();
+		armaSelecionada.repaint();
 	}
 }

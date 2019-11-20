@@ -18,8 +18,10 @@ public class FRBatalhaNaval extends JFrame implements EscutaCliqueCampoBatalha {
 		setBounds(0,0,(int)wid,(int)hei);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setLayout(null);
-		tabEsq = new PNCampoDeBatalha(0, 20, (wid/3), 2*hei/3, 1);
-		tabDir = new PNCampoDeBatalha(wid/2, 20, (wid/3), 2*hei/3, 2);
+		tabEsq = new PNCampoDeBatalha(0, 20, (wid/3), 2*hei/3);
+		tabEsq.setJog(f.getJogador1());
+		tabDir = new PNCampoDeBatalha(wid/2, 20, (wid/3), 2*hei/3);
+		tabDir.setJog(f.getJogador2());
 		tabEsq.addCliqueListener(this);
 		tabDir.addCliqueListener(this);
 		getContentPane().add(tabEsq);
@@ -29,7 +31,7 @@ public class FRBatalhaNaval extends JFrame implements EscutaCliqueCampoBatalha {
 		setTitle("Batalha Naval");
 	}
 	
-	public void recebeClique(int x, int y, int jogador) {
+	public void recebeClique(int x, int y, Jogador jogador) {
 		facade.atira(x, y, jogador);
 	}
 }
