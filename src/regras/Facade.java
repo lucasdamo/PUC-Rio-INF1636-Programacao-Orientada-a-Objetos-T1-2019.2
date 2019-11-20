@@ -31,7 +31,7 @@ public class Facade implements Observable {
 		return ctrl.getTab2();
 	}
 	
-	public void atira(int x, int y, int jog) {
+	public void atira(int x, int y, Jogador jog) {
 		ctrl.atira(x, y, jog);
 		notifyObservers();
 	}

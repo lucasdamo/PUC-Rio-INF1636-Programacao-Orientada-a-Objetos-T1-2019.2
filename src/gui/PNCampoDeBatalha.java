@@ -16,14 +16,14 @@ import observador.*;
 
 
 public class PNCampoDeBatalha extends JPanel implements MouseListener, AvisaCliqueCampoBatalha, Observer {
-	int jog;
+	Jogador jog;
 	Celula tab[][] = new Celula[15][15];
 	Line2D.Double lnX[] = new Line2D.Double[16];
 	Line2D.Double lnY[] = new Line2D.Double[16];
 	double xIni, yIni, larg, alt, xFim, yFim;
 	Facade f = Facade.getFacade();
 	List<EscutaCliqueCampoBatalha> lob=new ArrayList<EscutaCliqueCampoBatalha>();
-	public PNCampoDeBatalha(double xInicial, double yInicial, double largura, double altura, int jog) {
+	public PNCampoDeBatalha(double xInicial, double yInicial, double largura, double altura) {
 		double x, y;
 		this.alt = altura;
 		this.larg = largura;
@@ -63,12 +63,20 @@ public class PNCampoDeBatalha extends JPanel implements MouseListener, AvisaCliq
 		}
 	}
 	
+	public void setJog(Jogador j) {
+		jog = j;
+	}
+	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		desenhaCampo(g);
+	}
+	
+	public void desenhaCampo(Graphics g) {
 		Graphics2D g2d=(Graphics2D) g;
 		Rectangle2D rt;
 		int campoJog[][];
-		if(jog == 1) {
+		if(jog.getId() == 1) {
 			campoJog = f.getTab1();
 		}
 		else {
@@ -126,12 +134,19 @@ public class PNCampoDeBatalha extends JPanel implements MouseListener, AvisaCliq
 		lob.remove(o);
 	}
 
-	public void avisaCliqueObservadores(int x, int y, int jogador) {
+	public void avisaCliqueObservadores(int x, int y, Jogador jogador) {
 		for(EscutaCliqueCampoBatalha o:lob)
 			o.recebeClique(x, y, jogador);
 	}
 
 	public void notify(Observable o) {
 		repaint();
+	}
+	
+	public int getLarguraCelula() {
+		return (int) larg;
+	}
+	public int getAlturaCelula() {
+		return (int) alt;
 	}
 }

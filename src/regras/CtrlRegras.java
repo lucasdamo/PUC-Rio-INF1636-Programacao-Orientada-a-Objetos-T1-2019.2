@@ -34,15 +34,15 @@ public class CtrlRegras {
 		if(vez == 1) vez = 2;
 		else vez = 1;
 	}
-	public void atira(int i, int j, int jog) {
+	public void atira(int i, int j, Jogador jog) {
 		//System.out.print(i + " " + j + " " + jog + "\n");
-		if(jog == 1) {
+		if(jog.getId() == 1) {
 			if(vez == 1) {
 				campoJog1[i][j] = 1;
 				mudaVez();
 			}
 		}
-		else if(jog==2) {
+		else if(jog.getId() ==2) {
 			if(vez == 2) {
 				campoJog2[i][j] = 1;
 				mudaVez();
