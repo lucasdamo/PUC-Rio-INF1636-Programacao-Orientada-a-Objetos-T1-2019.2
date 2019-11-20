@@ -69,10 +69,34 @@ public class PNCampoDeBatalha extends JPanel implements MouseListener, AvisaCliq
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		desenhaIndices(g);
 		desenhaCampo(g);
+		desenhaLinhas(g);
 	}
 	
-	public void desenhaCampo(Graphics g) {
+	private void desenhaIndices(Graphics g) {
+		Graphics2D g2d=(Graphics2D) g;
+		g2d.setPaint(Color.black);
+		//System.out.print("\nCoordenadas Campo [" + xIni +", " + yIni + "] " + " -- [" + xIni + larg + ", " + yIni + alt + "]\n");
+		for(int i =0; i<15; i++) {
+			String write = Integer.toString(i+1);
+			g2d.drawString(write, (int) (tab[0][i].x + larg/3), (int) yIni/2); // (yIni / 2) porque 0 não exibe a string
+			g2d.drawString(write, 0, (int) (tab[i][0].y + alt/2));
+			//System.out.print("Coordenadas stringX: " + (int) (tab[0][i].x + larg/2) + ", 0\n");
+			//System.out.print("Coordenadas stringY: 0, " + (int) (tab[i][0].y + alt/2) + "\n");
+		}
+	}
+	
+	private void desenhaLinhas(Graphics g) {
+		Graphics2D g2d=(Graphics2D) g;
+		g2d.setPaint(Color.black);
+		for(int i =0; i<16; i++) {
+			g2d.draw(lnX[i]);
+			g2d.draw(lnY[i]);
+		}
+	}
+	
+	private void desenhaCampo(Graphics g) {
 		Graphics2D g2d=(Graphics2D) g;
 		Rectangle2D rt;
 		int campoJog[][];
@@ -91,30 +115,23 @@ public class PNCampoDeBatalha extends JPanel implements MouseListener, AvisaCliq
 				g2d.fill(rt);
 			}
 		}
-		g2d.setPaint(Color.black);
-		// Desenha todas as linhas 
-		for(int i =0; i<16; i++) {
-			g2d.draw(lnX[i]);
-			g2d.draw(lnY[i]);
-		}
-		// Desenha os indices
-		//System.out.print("\nCoordenadas Campo [" + xIni +", " + yIni + "] " + " -- [" + xIni + larg + ", " + yIni + alt + "]\n");
-		for(int i =0; i<15; i++) {
-			String write = Integer.toString(i+1);
-			g2d.setPaint(Color.black);
-			g2d.drawString(write, (int) (tab[0][i].x + larg/3), (int) yIni/2); // (yIni / 2) porque 0 não exibe a string
-			g2d.drawString(write, 0, (int) (tab[i][0].y + alt/2));
-			//System.out.print("Coordenadas stringX: " + (int) (tab[0][i].x + larg/2) + ", 0\n");
-			//System.out.print("Coordenadas stringY: 0, " + (int) (tab[i][0].y + alt/2) + "\n");
-		}
 	}
+	
 	
 	public void mouseClicked(MouseEvent e) { 
 		int x=e.getX(),y=e.getY();
-		System.out.print("Mouse Clicado x=" + x + " y=" + y + "\n");
-		x = (int)( (double) x / larg);
-		y = (int)( (double) y / alt);
+		System.out.print("Mouse Clicado x=" + x + " y=" + y + "  ");
+		x = (int)( (double) (x - xIni) / larg);
+		y = (int)( (double) (y - yIni) / alt);
+		System.out.print("Celula ("+ x + ", " + y + ")\n");
 		avisaCliqueObservadores(x, y, this.jog);
+	}
+	
+	public double getAbsX(int x, int y) {
+		return tab[y][x].x;
+	}
+	public double getAbsY(int x, int y) {
+		return tab[y][x].y;
 	}
 	
 	public int tipo() {

@@ -12,21 +12,20 @@ import java.util.List;
 import armas.TipoArma;
 
 public class PNCampoDeBatalhaPosicionaArmas extends PNCampoDeBatalha {
-	
+	TipoArma armaMat[][] = new TipoArma[15][15];
 	public PNCampoDeBatalhaPosicionaArmas(double xInicial, double yInicial, double largura, double altura) {
 		super(xInicial, yInicial, largura, altura);
+		for(int i = 0; i<15; i++) {
+			for(int j = 0; j<15; j++) {
+				armaMat[i][j] = TipoArma.Nenhuma;
+			}
+		}
 	}
 	@Override
-	public void desenhaCampo(Graphics g) {
+	private void desenhaCampo(Graphics g) {
 		Graphics2D g2d=(Graphics2D) g;
 		Rectangle2D rt;
 		int campoJog[][];
-		if(jog.getId() == 1) {
-			campoJog = f.getTab1();
-		}
-		else {
-			campoJog = f.getTab2();
-		}
 		for(int i=0;i<15;i++) {
 			for(int j=0;j<15;j++) {
 				if(campoJog[j][i] == 1) g2d.setPaint(Color.red);
