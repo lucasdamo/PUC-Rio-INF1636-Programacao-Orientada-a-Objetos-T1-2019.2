@@ -14,7 +14,7 @@ public class MainController implements Observer {
 	static MainController mainControl = null;
 	public MainController() {
 		MainController.setControl(this);
-		this.estadoAtual = estadoAtual.PosicionamentoArmasJog1;
+		this.estadoAtual = estadoAtual.Inicio;
 		executaEstadoAtual();
 	}
 	
@@ -41,7 +41,7 @@ public class MainController implements Observer {
 	}
 	
 	private void executaEstadoAtual() {
-		if(frameAtual != null)frameAtual.setVisible(false);
+		if(frameAtual != null)frameAtual.dispose();
 		switch(estadoAtual) {
 			case Inicio:
 				frameAtual = new FRMenuInicial();
