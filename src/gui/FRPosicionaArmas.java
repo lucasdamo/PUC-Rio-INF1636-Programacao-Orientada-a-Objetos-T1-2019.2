@@ -2,6 +2,7 @@ package gui;
 
 import javax.swing.*;
 import armas.*;
+import controladores.MainController;
 
 import java.awt.*;
 import java.awt.geom.*;
@@ -22,6 +23,7 @@ public class FRPosicionaArmas extends JFrame implements EscutaCliqueCampoBatalha
 	double wid, hei;
 	double campoX, campoY;
 	ArrayList<Arma> loa = new ArrayList<Arma>();
+	JButton botaoGuardarTab;
 	public FRPosicionaArmas(Facade f, Jogador jog) {
 		this.addKeyListener(this);
 		
@@ -41,6 +43,16 @@ public class FRPosicionaArmas extends JFrame implements EscutaCliqueCampoBatalha
 		QuadradoArma.setAltura(campoDeBatalha.getAlturaCelula());
 		QuadradoArma.setLargura(campoDeBatalha.getLarguraCelula());
 
+		botaoGuardarTab = new JButton("Guardar");
+		botaoGuardarTab.setBounds((int)(wid/2 - 50), (int)(hei-150),100, 50);
+		botaoGuardarTab.setVisible(true);
+		botaoGuardarTab.setEnabled(false);
+		botaoGuardarTab.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	MainController.getControl().nextEstado();
+            }
+		});
+		getContentPane().add(botaoGuardarTab);
 		
 		int largDivArmas = (int)(wid/2 -20);
 		int alturaDivArmas = (int)(hei - 20);
@@ -55,24 +67,53 @@ public class FRPosicionaArmas extends JFrame implements EscutaCliqueCampoBatalha
 			getContentPane().add(des);
 			loa.add(des);
 			xAux = xAux + largDes;
-			repaint();
 			
 		}	
-		
+		 
 		// Submarinos
 		xAux = 20;
-		int largSub = Submarino.getLarguraPadrao() + (largDivArmas - (Destroyer.getLarguraPadrao() * 5)) /5 ;
-		for(int i=0; i<5; i++) {
+		int largSub = Submarino.getLarguraPadrao() + (largDivArmas - (Submarino.getLarguraPadrao() * 5)) /5 ;
+		for(int i=0; i<4; i++) {
 			Submarino sub = new Submarino(xAux,20,-2,-2);
 			sub.addObserver(this);
 			getContentPane().add(sub);
 			loa.add(sub);
 			xAux = xAux + largSub;
-			repaint();
 		}		
+		
+		// Cruzadores
+		xAux = 20;
+		int largCru = Cruzador.getLarguraPadrao() + (largDivArmas - (Cruzador.getLarguraPadrao() * 3)) /3 ;
+		for(int i=0; i<2; i++) {
+			Cruzador cru = new Cruzador(xAux,200,-2,-2);
+			cru.addObserver(this);
+			getContentPane().add(cru);
+			loa.add(cru);
+			xAux = xAux + largDes;
+		}
+		
+		
+		// Couracados
+		xAux = 20;
+		Couracado cou = new Couracado(xAux, 300, -2, -2);
+		cou.addObserver(this);
+		getContentPane().add(cou);
+		loa.add(cou);
+		
+		// Hidroavioes
+		xAux = 20;
+		int largHid = Hidroaviao.getLarguraPadrao() + (largDivArmas - (Hidroaviao.getLarguraPadrao() * 6)) /6 ;
+		for(int i=0; i<5; i++) {
+			Hidroaviao hid = new Hidroaviao(xAux,400,-2,-2);
+			hid.addObserver(this);
+			getContentPane().add(hid);
+			loa.add(hid);
+			xAux = xAux + largHid;
+		}	
 		
 		// Ordem dos layers a serem adicionados, os primeiros ficam em cima dos seguintes
 		getContentPane().add(campoDeBatalha);
+		repaint();
 	}
 	
 	private int[][] geraMatriz(){
@@ -253,8 +294,12 @@ public class FRPosicionaArmas extends JFrame implements EscutaCliqueCampoBatalha
 		if(keyCode == 27) {
 			/* ESC */
 			if(armaSelecionada != null) {
+				Boolean habilitarGuardar;
 				armaSelecionada.unOpaque();
-				armasOK();
+				habilitarGuardar = armasOK();
+				if(habilitarGuardar) {
+					botaoGuardarTab.setEnabled(true);
+				}
 				armaSelecionada = null;
 			}
 		}

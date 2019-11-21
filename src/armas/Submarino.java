@@ -35,6 +35,7 @@ public class Submarino extends Arma {
 		loqa.add(new QuadradoArma(0,0, this.relX, this.relY));
 		largura = QuadradoArma.getLargura();
 		altura = QuadradoArma.getAltura();
+		this.setBounds(this.x, this.y, this.largura, this.altura);
 		repaint();
 	}
 	@Override
@@ -42,15 +43,4 @@ public class Submarino extends Arma {
 		// TODO Auto-generated method stub
 		setCor(cor);
 	}
-	@Override
-	public void move(int x, int y, int relX, int relY) {
-		// TODO Auto-generated method stub
-		this.x = x;
-		this.y = y;
-		this.relX = relX;
-		this.relY = relY;
-		System.out.print("Moved to " + this.x + ", " + this.y + "\n");
-		this.setBounds(this.x, this.y, QuadradoArma.getLargura(), QuadradoArma.getAltura());
-		rotate(relX, relY);
-	}	
 }

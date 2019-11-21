@@ -42,33 +42,13 @@ public class Destroyer extends Arma {
 				loqa.add(new QuadradoArma(QuadradoArma.getLargura(), 0, this.relX + 1, this.relY));	
 				break;
 		}	
+		this.setBounds(this.x, this.y, this.largura, this.altura);
 		repaint();
 	}
 	@Override
 	public void unOpaque() {
 		// TODO Auto-generated method stub
 		setCor(cor);
-	}
-	@Override
-	public void move(int x, int y, int relX, int relY) {
-		// TODO Auto-generated method stub
-		this.x = x;
-		this.y = y;
-		this.relX = relX;
-		this.relY = relY;
-		System.out.print("Moved to " + this.x + ", " + this.y + "\n");
-		switch(this.rot) {
-			case ZeroGraus:
-				this.setBounds(this.x, this.y, QuadradoArma.getLargura() * 2, QuadradoArma.getAltura());
-				break;
-			case NoventaGraus:
-				this.setBounds(this.x, this.y, QuadradoArma.getLargura(), QuadradoArma.getAltura() * 2);
-				break;
-			case CentoEOitentaGraus:
-				this.setBounds(this.x, this.y, QuadradoArma.getLargura() * 2, QuadradoArma.getAltura());
-				break;
-		}
-		rotate(relX, relY);
 	}
 
 }
