@@ -14,16 +14,20 @@ import observador.Observer;
 
 public abstract class Arma extends JPanel implements MouseListener, Observable {
 	Rotacao rot = Rotacao.ZeroGraus;
-	List<Observer> lob = new ArrayList<Observer>();
-	List<QuadradoArma> loqa = new ArrayList<QuadradoArma>();
-	Color cor;
+	ArrayList<Observer> lob = new ArrayList<Observer>();
+	ArrayList<QuadradoArma> loqa = new ArrayList<QuadradoArma>();
 	int x, relX;
 	int y, relY;
+	int largura, altura;
+	Color cor;
 	public static Color opColor = new Color(255,51,153);
 	{
 		addMouseListener(this);
 	}
 	
+	public Color getCor() {
+		return cor;
+	}
 	public Arma(int x, int y, int relX, int relY) {
 		this.setLayout(null);
 		//this.setBackground(Color.yellow);
@@ -34,15 +38,32 @@ public abstract class Arma extends JPanel implements MouseListener, Observable {
 		System.out.print("Arma criada " + x + ", " + y + " " + relX + " " + relY + "\n");
 	}
 	
+	public int getLargura() {
+		return largura;
+	}
+	public int getAltura() {
+		return altura;
+	}
+	public int getRelX() {
+		return relX;
+	}
+	public int getRelY() {
+		return relY;
+	}
+	public ArrayList<QuadradoArma> getListQuadradoArma(){
+		return loqa;
+	}
+	
 	public void changeRotatation() {
 		int index = rot.ordinal();
 		int nextIndex = index + 1;
 		Rotacao[] orientacoes = Rotacao.values();
 		nextIndex %= orientacoes.length;
 		rot = orientacoes[nextIndex];
+		rotate(this.relX, this.relY);
 	}
 	public abstract void move(int x, int y, int relX, int relY);
-	public abstract void rotate();
+	public abstract void rotate(int relX, int relY);
 	
 	public void setOpaque() {
 		for(QuadradoArma qd : loqa) {
