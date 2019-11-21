@@ -33,23 +33,20 @@ public class Hidroaviao extends Arma {
 			case NoventaGraus:
 				this.largura = QuadradoArma.getLargura() * 2;
 				this.altura = QuadradoArma.getAltura() * 3;
-				loqa.add(new QuadradoArma(QuadradoArma.getLargura(),QuadradoArma.getAltura(),this.relX + 1, this.relY + 1));
-				loqa.add(new QuadradoArma(0, 0, this.relX, this.relY));
-				loqa.add(new QuadradoArma(0, QuadradoArma.getAltura()*2, this.relX, this.relY+2));
+				loqa.add(new QuadradoArma(0,0, this.relX, this.relY));
+				loqa.add(new QuadradoArma(0, QuadradoArma.getAltura(), this.relX, this.relY + 1));
 				break;
 			case CentoEOitentaGraus:
 				this.largura = QuadradoArma.getLargura() * 3;
 				this.altura = QuadradoArma.getAltura() * 2;
 				loqa.add(new QuadradoArma(0,0, this.relX, this.relY));
-				loqa.add(new QuadradoArma(QuadradoArma.getLargura()*2, 0, this.relX + 2, this.relY));
-				loqa.add(new QuadradoArma(QuadradoArma.getLargura()*1, QuadradoArma.getAltura(), this.relX + 1, this.relY + 1));	
+				loqa.add(new QuadradoArma(QuadradoArma.getLargura(), 0, this.relX + 1, this.relY));	
 				break;
 			case DuzentosESetentaGraus:
 				this.largura = QuadradoArma.getLargura() * 2;
 				this.altura = QuadradoArma.getAltura() * 3;
-				loqa.add(new QuadradoArma(0, QuadradoArma.getAltura(), this.relX, this.relY + 1));
-				loqa.add(new QuadradoArma(QuadradoArma.getLargura(), 0, this.relX + 1, this.relY));
-				loqa.add(new QuadradoArma(QuadradoArma.getLargura(), QuadradoArma.getAltura() * 2, this.relX + 1, this.relY + 2));	
+				loqa.add(new QuadradoArma(0,0, this.relX, this.relY));
+				loqa.add(new QuadradoArma(QuadradoArma.getLargura(), 0, this.relX + 1, this.relY));	
 				break;
 		}	
 		this.setBounds(this.x, this.y, this.largura, this.altura);
