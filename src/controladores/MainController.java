@@ -41,7 +41,7 @@ public class MainController implements Observer {
 	}
 	
 	private void executaEstadoAtual() {
-		if(frameAtual != null)frameAtual.setVisible(false);
+		if(frameAtual != null)frameAtual.dispose();
 		switch(estadoAtual) {
 			case Inicio:
 				frameAtual = new FRMenuInicial();
