@@ -62,7 +62,17 @@ public abstract class Arma extends JPanel implements MouseListener, Observable {
 		rot = orientacoes[nextIndex];
 		rotate(this.relX, this.relY);
 	}
-	public abstract void move(int x, int y, int relX, int relY);
+	
+	public void move(int x, int y, int relX, int relY) {
+		// TODO Auto-generated method stub
+		this.x = x;
+		this.y = y;
+		this.relX = relX;
+		this.relY = relY;
+		System.out.print("Moved to " + this.x + ", " + this.y + "\n");
+		this.setLocation(x,y);
+		rotate(relX, relY);
+	}
 	public abstract void rotate(int relX, int relY);
 	
 	public void setOpaque() {
