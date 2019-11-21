@@ -77,6 +77,7 @@ public abstract class Arma extends JPanel implements MouseListener, Observable {
 		for(QuadradoArma qd : loqa) {
 			qd.setCor(cor);
 		}
+		repaint();
 	}
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);

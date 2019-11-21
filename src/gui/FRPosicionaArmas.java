@@ -50,11 +50,12 @@ public class FRPosicionaArmas extends JFrame implements EscutaCliqueCampoBatalha
 		xAux = 20;
 		int largDes = Destroyer.getLarguraPadrao() + (largDivArmas - (Destroyer.getLarguraPadrao() * 4)) /4 ;
 		for(int i=0; i<3; i++) {
-			Destroyer des = new Destroyer(xAux,100,-1,-1);
+			Destroyer des = new Destroyer(xAux,100,-2,-2);
 			des.addObserver(this);
 			getContentPane().add(des);
 			loa.add(des);
 			xAux = xAux + largDes;
+			repaint();
 			
 		}	
 		
@@ -62,12 +63,12 @@ public class FRPosicionaArmas extends JFrame implements EscutaCliqueCampoBatalha
 		xAux = 20;
 		int largSub = Submarino.getLarguraPadrao() + (largDivArmas - (Destroyer.getLarguraPadrao() * 5)) /5 ;
 		for(int i=0; i<5; i++) {
-			Submarino sub = new Submarino(xAux,20,-1,-1);
+			Submarino sub = new Submarino(xAux,20,-2,-2);
 			sub.addObserver(this);
 			getContentPane().add(sub);
 			loa.add(sub);
 			xAux = xAux + largSub;
-			
+			repaint();
 		}		
 		
 		// Ordem dos layers a serem adicionados, os primeiros ficam em cima dos seguintes
@@ -86,13 +87,13 @@ public class FRPosicionaArmas extends JFrame implements EscutaCliqueCampoBatalha
 				relX = q.getRelX();
 				relY = q.getRelY();
 				System.out.print(relX + " - " + relY + "\n");
-				if(relX >= 0 && relY >= 0) {
-					if(relX > 14 || relY > 14) {
-						System.out.print("Erro, quadrado fora do campo\n");
-						q.setCor(Color.red);
-						matriz[0][0] = -1; // Para marcar que houve erro e a matriz não deve ser aceita
-					}
-					else if(matriz[relY][relX] == 1) {
+				if(relX > 14 || relY > 14) {
+					System.out.print("Erro, quadrado fora do campo\n");
+					q.setCor(Color.red);
+					matriz[0][0] = -1; // Para marcar que houve erro e a matriz não deve ser aceita
+				}
+				else if(relX >= 0 && relY >= 0) {
+					if(matriz[relY][relX] == 1) {
 						System.out.print("Erro sobreposicao de armas\n");
 						if(armaSelecionada != null) {
 							int mudou = 0;
@@ -109,8 +110,96 @@ public class FRPosicionaArmas extends JFrame implements EscutaCliqueCampoBatalha
 						matriz[relY][relX] = -1;
 					}
 					else if(matriz[relY][relX] == 0) {
-						matriz[relY][relX] = 1;
-						q.setCor(a.getCor());
+						Boolean mesmaArma = true;
+						if(relY < 14) {
+							if( matriz[relY+1][relX] != 0 ) {
+								mesmaArma = false;
+								for(QuadradoArma qq: a.getListQuadradoArma()) {
+									if(qq.getRelX() == relX && qq.getRelY() == relY + 1) {
+										mesmaArma = true;
+									}
+								}
+							}
+						}
+						if(relX < 14) {
+							if( matriz[relY][relX + 1] != 0 ) {
+								mesmaArma = false;
+								for(QuadradoArma qq: a.getListQuadradoArma()) {
+									if(qq.getRelX() == relX + 1 && qq.getRelY() == relY) {
+										mesmaArma = true;
+									}
+								}
+							}
+						}
+						if(relX < 14 && relY < 14) {
+							if( matriz[relY + 1][relX + 1] != 0 ) {
+								mesmaArma = false;
+								for(QuadradoArma qq: a.getListQuadradoArma()) {
+									if(qq.getRelX() == relX + 1 && qq.getRelY() == relY + 1) {
+										mesmaArma = true;
+									}
+								}
+							}
+						}
+						if(relY > 0) {
+							if( matriz[relY-1][relX] != 0 ) {
+								mesmaArma = false;
+								for(QuadradoArma qq: a.getListQuadradoArma()) {
+									if(qq.getRelX() == relX && qq.getRelY() == relY - 1) {
+										mesmaArma = true;
+									}
+								}
+							}
+						}
+						if(relX > 0) {
+							if( matriz[relY][relX - 1] != 0 ) {
+								mesmaArma = false;
+								for(QuadradoArma qq: a.getListQuadradoArma()) {
+									if(qq.getRelX() == relX - 1 && qq.getRelY() == relY) {
+										mesmaArma = true;
+									}
+								}
+							}
+						}
+						if(relX > 0 && relY > 0) {
+							if( matriz[relY - 1][relX - 1] != 0 ) {
+								mesmaArma = false;
+								for(QuadradoArma qq: a.getListQuadradoArma()) {
+									if(qq.getRelX() == relX - 1 && qq.getRelY() == relY - 1) {
+										mesmaArma = true;
+									}
+								}
+							}
+						}
+						if(relX > 0 && relY < 14) {
+							if( matriz[relY + 1][relX - 1] != 0 ) {
+								mesmaArma = false;
+								for(QuadradoArma qq: a.getListQuadradoArma()) {
+									if(qq.getRelX() == relX - 1 && qq.getRelY() == relY + 1) {
+										mesmaArma = true;
+									}
+								}
+							}
+						}
+						if(relX < 14 && relY > 0) {
+							if( matriz[relY - 1][relX + 1] != 0 ) {
+								mesmaArma = false;
+								for(QuadradoArma qq: a.getListQuadradoArma()) {
+									if(qq.getRelX() == relX + 1 && qq.getRelY() == relY - 1) {
+										mesmaArma = true;
+									}
+								}
+							}
+						}
+						if(!mesmaArma) {
+							System.out.print("Arma muito proxima a outra");
+							q.setCor(Color.red);
+							matriz[relY][relX] = -1;
+						}
+						else {
+							matriz[relY][relX] = 1;
+							q.setCor(a.getCor());
+						}
 					}
 				}
 				else if (relX == -2 || relY == -2) {
@@ -125,6 +214,16 @@ public class FRPosicionaArmas extends JFrame implements EscutaCliqueCampoBatalha
 		System.out.print("Quadrado contados " + contaQuadrado + "\n");
 		repaint();
 		return matriz;
+	}
+	public Boolean armasOK() {
+		int[][] matriz = geraMatriz();
+		for(int i = 0; i<15; i++) {
+			for(int j=0; j<15; j++) {
+				if(matriz[i][j] < 0) return false;
+			}
+		}
+		System.out.print("Armas OK");
+		return true;
 	}
 	
 	public void recebeClique(int x, int y, Jogador jogador) {
@@ -155,7 +254,7 @@ public class FRPosicionaArmas extends JFrame implements EscutaCliqueCampoBatalha
 			/* ESC */
 			if(armaSelecionada != null) {
 				armaSelecionada.unOpaque();
-				geraMatriz();
+				armasOK();
 				armaSelecionada = null;
 			}
 		}
