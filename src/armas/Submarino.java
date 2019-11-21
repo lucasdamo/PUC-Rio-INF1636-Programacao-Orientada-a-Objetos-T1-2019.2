@@ -18,19 +18,32 @@ public class Submarino extends Arma {
 		super(x, y, relX, relY);
 		setCor(Submarino.cor);
 		this.setBounds(this.x, this.y, QuadradoArma.getLargura(), QuadradoArma.getAltura());
-		rotate();
+		rotate(this.relX, this.relY);
 		repaint();
 		
 	}
+	
+	public static int getLarguraPadrao() {
+		return QuadradoArma.getLargura();
+	}
+	public static int getAlturaPadrao() {
+		return QuadradoArma.getAltura();
+	}
+	
 	@Override
-	public void rotate() {
+	public void rotate(int relX, int relY) {
 		// Submarino so tem 1 quadrado, rotacionar nao importa
+		loqa.removeAll(loqa);
 		loqa.add(new QuadradoArma(0,0, this.relX, this.relY));
+		largura = QuadradoArma.getLargura();
+		altura = QuadradoArma.getAltura();
+		repaint();
 	}
 	@Override
 	public void unOpaque() {
 		// TODO Auto-generated method stub
 		setCor(Submarino.cor);
+		repaint();
 	}
 	@Override
 	public void move(int x, int y, int relX, int relY) {
@@ -41,5 +54,6 @@ public class Submarino extends Arma {
 		this.relY = relY;
 		System.out.print("Moved to " + this.x + ", " + this.y + "\n");
 		this.setBounds(this.x, this.y, QuadradoArma.getLargura(), QuadradoArma.getAltura());
+		repaint();
 	}	
 }

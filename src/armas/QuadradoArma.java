@@ -13,10 +13,10 @@ public class QuadradoArma extends JPanel {
 	private static int tamY;
 	private Color cor;
 	private float opaque = (float) 0.2;
-	private int x; // Abscissa referente ao JPanel arma
-	private int y; // Ordenada referente ao JPanel arma
-	private int relX; // Abscissa referente ao campo de batalha
-	private int relY; // Ordenada referente ao campo de batalha
+	private int x; // Abscissa PIXELS referente ao JPanel arma
+	private int y; // Ordenada PIXELS referente ao JPanel arma
+	private int relX; // Abscissa INDICE referente ao campo de batalha
+	private int relY; // Ordenada INDICE referente ao campo de batalha
 	public QuadradoArma(int x, int y, int relX, int relY) {
 		this.setLayout(null);
 		this.relX = relX;
