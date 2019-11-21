@@ -13,7 +13,7 @@ import observador.Observable;
 import observador.Observer;
 
 public abstract class Arma extends JPanel implements MouseListener, Observable {
-	private Rotacao rot = Rotacao.ZeroGraus;
+	Rotacao rot = Rotacao.ZeroGraus;
 	List<Observer> lob = new ArrayList<Observer>();
 	List<QuadradoArma> loqa = new ArrayList<QuadradoArma>();
 	Color cor;
@@ -25,10 +25,13 @@ public abstract class Arma extends JPanel implements MouseListener, Observable {
 	}
 	
 	public Arma(int x, int y, int relX, int relY) {
+		this.setLayout(null);
+		//this.setBackground(Color.yellow);
 		this.x = x;
 		this.y = y;
 		this.relX = relX;
 		this.relY = relY;
+		System.out.print("Arma criada " + x + ", " + y + " " + relX + " " + relY + "\n");
 	}
 	
 	public void changeRotatation() {
@@ -55,7 +58,9 @@ public abstract class Arma extends JPanel implements MouseListener, Observable {
 		}
 	}
 	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
 		for(QuadradoArma qd : loqa) {
+			this.add(qd);
 			qd.paintComponent(g);
 		}
 	}

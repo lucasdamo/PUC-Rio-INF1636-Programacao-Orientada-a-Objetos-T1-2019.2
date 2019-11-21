@@ -15,7 +15,7 @@ public class FRBatalhaNaval extends JFrame implements EscutaCliqueCampoBatalha {
 		Dimension screenSize=tk.getScreenSize();
 		this.facade = f;
 		double wid = screenSize.getWidth(), hei = screenSize.getHeight();
-		setBounds(0,0,(int)wid,(int)hei);
+		this.setBounds(0,0,(int)wid/2,(int)hei/2);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setLayout(null);
 		tabEsq = new PNCampoDeBatalha(0, 20, (wid/3), 2*hei/3);
