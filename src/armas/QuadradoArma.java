@@ -18,16 +18,24 @@ public class QuadradoArma extends JPanel {
 	private int relX; // Abscissa referente ao campo de batalha
 	private int relY; // Ordenada referente ao campo de batalha
 	public QuadradoArma(int x, int y, int relX, int relY) {
+		this.setLayout(null);
 		this.relX = relX;
-		this.relY = relY;
+		this.relY = relY;this.setLayout(null);
 		this.x = x;
 		this.y = y;
+		System.out.print("Quadrado criado " + x + ", " + y + ", " + relX + ", " + relY + "\n");
 	}
 	public int getRelX() {
 		return relX;
 	}
 	public int getRelY() {
 		return relY;
+	}
+	public int getX() {
+		return x;
+	}
+	public int getY() {
+		return y;
 	}
 	public static void setLargura(int largura) {
 		tamX = largura;
@@ -60,6 +68,6 @@ public class QuadradoArma extends JPanel {
 		rt = new Rectangle2D.Double(this.x, this.y, tamX, tamY);
 		g2d.fill(rt);
 		
-		g2d.dispose();
+		// g2d.dispose(); IMPEDE A VISUALIZAÇÃO DOS QUADRADOS QUE NÃO O PRIMEIRO ! ???
 	}
 }
