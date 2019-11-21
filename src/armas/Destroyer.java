@@ -5,11 +5,10 @@ import java.awt.Color;
 public class Destroyer extends Arma {
 	public Destroyer(int x, int y, int relX, int relY) {
 		super(x, y, relX, relY);
-		cor = Color.yellow;
-		setCor(cor);
 		this.move(this.x, this.y, this.relX, this.relY);
 		rotate(this.relX, this.relY);
-		repaint();
+		cor = Color.yellow;
+		setCor(cor);
 	}
 	public static int getLarguraPadrao() {
 		return QuadradoArma.getLargura() * 2;
@@ -49,7 +48,6 @@ public class Destroyer extends Arma {
 	public void unOpaque() {
 		// TODO Auto-generated method stub
 		setCor(cor);
-		repaint();
 	}
 	@Override
 	public void move(int x, int y, int relX, int relY) {

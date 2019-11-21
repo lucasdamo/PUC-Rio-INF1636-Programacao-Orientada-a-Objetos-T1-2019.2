@@ -13,14 +13,12 @@ import observador.Observable;
 import observador.Observer;
 
 public class Submarino extends Arma {
-	public static Color cor = new Color(0,51,153);
 	public Submarino(int x, int y, int relX, int relY) {
 		super(x, y, relX, relY);
-		setCor(Submarino.cor);
 		this.setBounds(this.x, this.y, QuadradoArma.getLargura(), QuadradoArma.getAltura());
 		rotate(this.relX, this.relY);
-		repaint();
-		
+		cor = new Color(0,51,153);
+		setCor(cor);
 	}
 	
 	public static int getLarguraPadrao() {
@@ -42,8 +40,7 @@ public class Submarino extends Arma {
 	@Override
 	public void unOpaque() {
 		// TODO Auto-generated method stub
-		setCor(Submarino.cor);
-		repaint();
+		setCor(cor);
 	}
 	@Override
 	public void move(int x, int y, int relX, int relY) {
@@ -54,6 +51,6 @@ public class Submarino extends Arma {
 		this.relY = relY;
 		System.out.print("Moved to " + this.x + ", " + this.y + "\n");
 		this.setBounds(this.x, this.y, QuadradoArma.getLargura(), QuadradoArma.getAltura());
-		repaint();
+		rotate(relX, relY);
 	}	
 }
