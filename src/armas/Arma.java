@@ -30,6 +30,7 @@ public abstract class Arma extends JPanel implements MouseListener, Observable {
 	}
 	public Arma(int x, int y, int relX, int relY) {
 		this.setLayout(null);
+		this.setOpaque(false);
 		//this.setBackground(Color.yellow);
 		this.x = x;
 		this.y = y;
