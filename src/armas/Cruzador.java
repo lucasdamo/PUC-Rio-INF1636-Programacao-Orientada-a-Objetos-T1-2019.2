@@ -40,12 +40,8 @@ public class Cruzador extends Arma {
 				loqa.add(new QuadradoArma(0, QuadradoArma.getAltura() * 3, this.relX, this.relY + 3));
 				break;
 			case CentoEOitentaGraus:
-				this.largura = QuadradoArma.getLargura() * 4;
-				this.altura = QuadradoArma.getAltura();
-				loqa.add(new QuadradoArma(0,0, this.relX, this.relY));
-				loqa.add(new QuadradoArma(QuadradoArma.getLargura(), 0, this.relX + 1, this.relY));
-				loqa.add(new QuadradoArma(QuadradoArma.getLargura() * 2, 0, this.relX + 2, this.relY));
-				loqa.add(new QuadradoArma(QuadradoArma.getLargura() * 3, 0, this.relX + 3, this.relY));
+			case DuzentosESetentaGraus:
+				this.changeRotatation();
 				break;
 		}	
 		this.setBounds(this.x, this.y, this.largura, this.altura);

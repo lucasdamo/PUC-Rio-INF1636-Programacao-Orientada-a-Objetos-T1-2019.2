@@ -24,6 +24,12 @@ public class CtrlRegras {
 	public int[][] getTab1(){
 		return campoJog1;
 	}
+	public void setTab1(int matriz[][]) {
+		campoJog1 = matriz;
+	}
+	public void setTab2(int matriz[][]) {
+		campoJog2 = matriz;
+	}
 	public int[][] getTab2(){
 		return campoJog2;
 	}

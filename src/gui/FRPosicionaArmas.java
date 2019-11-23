@@ -15,7 +15,7 @@ import regras.*;
 import observador.*;
 import observador.Observable;
 import observador.Observer;
-
+import tratadores.ErroAoIdentificarJogador;
 public class FRPosicionaArmas extends JFrame implements EscutaCliqueCampoBatalha, Observer, KeyListener {
 	Facade facade;
 	Arma armaSelecionada = null;
@@ -49,7 +49,15 @@ public class FRPosicionaArmas extends JFrame implements EscutaCliqueCampoBatalha
 		botaoGuardarTab.setEnabled(false);
 		botaoGuardarTab.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	MainController.getControl().nextEstado();
+        		try {
+					f.setTab(geraMatriz(), jog);
+					MainController.getControl().nextEstado();
+				} catch (ErroAoIdentificarJogador e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Erro, jogador invalido", "InfoBox", JOptionPane.INFORMATION_MESSAGE);
+            		
+				}
             }
 		});
 		getContentPane().add(botaoGuardarTab);

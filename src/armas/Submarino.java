@@ -32,9 +32,18 @@ public class Submarino extends Arma {
 	public void rotate(int relX, int relY) {
 		// Submarino so tem 1 quadrado, rotacionar nao importa
 		loqa.removeAll(loqa);
-		loqa.add(new QuadradoArma(0,0, this.relX, this.relY));
-		largura = QuadradoArma.getLargura();
-		altura = QuadradoArma.getAltura();
+		switch(this.rot) {
+			case ZeroGraus:
+				loqa.add(new QuadradoArma(0,0, this.relX, this.relY));
+				this.largura = QuadradoArma.getLargura();
+				this.altura = QuadradoArma.getAltura();
+				break;
+			case NoventaGraus:
+			case CentoEOitentaGraus:
+			case DuzentosESetentaGraus:
+				this.changeRotatation();
+				break;
+		}	
 		this.setBounds(this.x, this.y, this.largura, this.altura);
 		repaint();
 	}

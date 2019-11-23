@@ -36,10 +36,8 @@ public class Destroyer extends Arma {
 				loqa.add(new QuadradoArma(0, QuadradoArma.getAltura(), this.relX, this.relY + 1));
 				break;
 			case CentoEOitentaGraus:
-				this.largura = QuadradoArma.getLargura() * 2;
-				this.altura = QuadradoArma.getAltura();
-				loqa.add(new QuadradoArma(0,0, this.relX, this.relY));
-				loqa.add(new QuadradoArma(QuadradoArma.getLargura(), 0, this.relX + 1, this.relY));	
+			case DuzentosESetentaGraus:
+				this.changeRotatation();
 				break;
 		}	
 		this.setBounds(this.x, this.y, this.largura, this.altura);
