@@ -71,6 +71,12 @@ public class Facade implements Observable {
 	public Jogador getJogador2() {
 		return ctrl.getJogador2();
 	}
+	public Jogador getJogadorDaVez() {
+		return ctrl.getJogadorDaVez();
+	}
+	public int getNumeroTirosRestantes() {
+		return ctrl.getNumeroTiros();
+	}
 	public void setTab(int matriz[][], Jogador jog) throws ErroAoIdentificarJogador {
 		if(jog == null) throw new ErroAoIdentificarJogador("Jogador é null");
 

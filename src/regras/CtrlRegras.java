@@ -11,6 +11,7 @@ public class CtrlRegras {
 	Jogador [] jogadores = new Jogador[2];
 	String nomeJog1, nomeJog2;
 	List<Observer> lob=new ArrayList<Observer>();
+	int tiros;
 	public CtrlRegras() {
 		vez = jogadores[0];
 		for(int i = 0; i<15; i++) {
@@ -19,6 +20,7 @@ public class CtrlRegras {
 				campoJog2[i][j] = 0;
 			}
 		}
+		tiros = 3;
 		System.out.print("Array inicializado");
 	}
 	public int[][] getTab1(){
@@ -36,33 +38,46 @@ public class CtrlRegras {
 	public Jogador getVez() {
 		return vez;
 	}
+	private void novaVez() {
+		tiros = 3;
+	}
 	public void mudaVez() {
 		if(vez.id == 1) vez = jogadores[1];
 		else vez = jogadores[0];
+		novaVez();
 	}
 	public void atira(int i, int j, Jogador jog) {
 		//System.out.print(i + " " + j + " " + jog + "\n");
 		if(jog.getId() == 1) {
 			if(vez.id == 1) {
 				campoJog1[i][j] = 1;
-				mudaVez();
+				tiros--;
 			}
 		}
 		else if(jog.getId() ==2) {
 			if(vez.id == 2) {
 				campoJog2[i][j] = 1;
-				mudaVez();
+				tiros--;
 			}
 		}
+		if(tiros < 1) mudaVez();
 	}
 	public void createJogadores(String nome1, String nome2) {
 		this.jogadores[0] = new Jogador(nome1, 1);
 		this.jogadores[1] = new Jogador(nome2, 2);
+		
+		vez = jogadores[0];
 	}
 	public Jogador getJogador1() {
 		return jogadores[0];
 	}
 	public Jogador getJogador2() {
 		return jogadores[1];
+	}
+	public Jogador getJogadorDaVez() {
+		return this.vez;
+	}
+	public int getNumeroTiros() {
+		return this.tiros;
 	}
 }

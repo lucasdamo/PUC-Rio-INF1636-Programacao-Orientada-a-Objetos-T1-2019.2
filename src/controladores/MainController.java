@@ -1,6 +1,7 @@
 package controladores;
 
 import javax.swing.JFrame;
+import tratadores.ErroAoIdentificarJogador;
 
 import gui.*;
 import regras.*;
@@ -14,7 +15,7 @@ public class MainController implements Observer {
 	static MainController mainControl = null;
 	public MainController() {
 		MainController.setControl(this);
-		this.estadoAtual = estadoAtual.Inicio;
+		this.estadoAtual = estadoAtual.Batalha;
 		executaEstadoAtual();
 	}
 	
@@ -48,12 +49,22 @@ public class MainController implements Observer {
 				break;
 			case PosicionamentoArmasJog1:
 				frameAtual = new FRPosicionaArmas(f, f.getJogador1());
-				
 				break;
 			case PosicionamentoArmasJog2:
 				frameAtual = new FRPosicionaArmas(f, f.getJogador2());
 				break;
 			case Batalha:
+				// --- Inicio stub para teste ---
+				int[][] tab1 = new int[15][15];
+				int[][] tab2 = new int[15][15];
+				f.createJogadores("A", "B");
+				try {
+					f.setTab(tab1, f.getJogador1());
+					f.setTab(tab2, f.getJogador2());
+				} catch (ErroAoIdentificarJogador e) {
+					e.printStackTrace();
+				}
+				// --- fim ---
 				frameAtual = new FRBatalhaNaval(f);
 				break;
 		}
