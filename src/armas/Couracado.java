@@ -7,7 +7,7 @@ public class Couracado extends Arma {
 		super(x, y, relX, relY);
 		this.move(this.x, this.y, this.relX, this.relY);
 		rotate(this.relX, this.relY);
-		cor = Color.magenta;
+		cor = new Color(112, 45, 0);
 		setCor(cor);
 	}
 	public static int getLarguraPadrao() {

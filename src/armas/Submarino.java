@@ -17,7 +17,7 @@ public class Submarino extends Arma {
 		super(x, y, relX, relY);
 		this.setBounds(this.x, this.y, QuadradoArma.getLargura(), QuadradoArma.getAltura());
 		rotate(this.relX, this.relY);
-		cor = new Color(0,51,153);
+		cor = new Color(30,179,4);
 		setCor(cor);
 	}
 	

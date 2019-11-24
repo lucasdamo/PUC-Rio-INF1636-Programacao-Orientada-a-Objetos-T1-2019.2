@@ -18,6 +18,7 @@ import observador.Observer;
 import tratadores.ErroAoIdentificarJogador;
 public class FRPosicionaArmas extends JFrame implements EscutaCliqueCampoBatalha, Observer, KeyListener {
 	Facade facade;
+	Jogador jogador;
 	Arma armaSelecionada = null;
 	PNCampoDeBatalha campoDeBatalha;
 	double wid, hei;
@@ -25,8 +26,8 @@ public class FRPosicionaArmas extends JFrame implements EscutaCliqueCampoBatalha
 	ArrayList<Arma> loa = new ArrayList<Arma>();
 	JButton botaoGuardarTab;
 	public FRPosicionaArmas(Facade f, Jogador jog) {
+		this.jogador = jog;
 		this.addKeyListener(this);
-		
 		this.setLayout(null);
 		Toolkit tk=Toolkit.getDefaultToolkit();
 		Dimension screenSize=tk.getScreenSize();
@@ -37,7 +38,7 @@ public class FRPosicionaArmas extends JFrame implements EscutaCliqueCampoBatalha
 		campoX = wid/2 + 10;
 		campoY = 20;
 		campoDeBatalha = new PNCampoDeBatalha(campoX, campoY, (wid/3), 2*hei/3);
-		campoDeBatalha.setJog(new Jogador("", 1));
+		campoDeBatalha.setJog(jogador);
 		campoDeBatalha.addCliqueListener(this);
 		setTitle("Posicionamento de armas para jogador");
 		QuadradoArma.setAltura(campoDeBatalha.getAlturaCelula());
@@ -50,7 +51,7 @@ public class FRPosicionaArmas extends JFrame implements EscutaCliqueCampoBatalha
 		botaoGuardarTab.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
         		try {
-					f.setTab(geraMatriz(), jog);
+					f.setTab(geraMatriz(), jogador);
 					MainController.getControl().nextEstado();
 				} catch (ErroAoIdentificarJogador e1) {
 					// TODO Auto-generated catch block
@@ -70,7 +71,7 @@ public class FRPosicionaArmas extends JFrame implements EscutaCliqueCampoBatalha
 		xAux = 20;
 		int largDes = Destroyer.getLarguraPadrao() + (largDivArmas - (Destroyer.getLarguraPadrao() * 4)) /4 ;
 		for(int i=0; i<3; i++) {
-			Destroyer des = new Destroyer(xAux,100,-2,-2);
+			Destroyer des = new Destroyer(xAux,100,-20,-20);
 			des.addObserver(this);
 			getContentPane().add(des);
 			loa.add(des);
@@ -81,7 +82,7 @@ public class FRPosicionaArmas extends JFrame implements EscutaCliqueCampoBatalha
 		xAux = 20;
 		int largSub = Submarino.getLarguraPadrao() + (largDivArmas - (Submarino.getLarguraPadrao() * 5)) /5 ;
 		for(int i=0; i<4; i++) {
-			Submarino sub = new Submarino(xAux,20,-2,-2);
+			Submarino sub = new Submarino(xAux,20,-20,-20);
 			sub.addObserver(this);
 			getContentPane().add(sub);
 			loa.add(sub);
@@ -92,7 +93,7 @@ public class FRPosicionaArmas extends JFrame implements EscutaCliqueCampoBatalha
 		xAux = 20;
 		int largCru = Cruzador.getLarguraPadrao() + (largDivArmas - (Cruzador.getLarguraPadrao() * 3)) /3 ;
 		for(int i=0; i<2; i++) {
-			Cruzador cru = new Cruzador(xAux,200,-2,-2);
+			Cruzador cru = new Cruzador(xAux,200,-20,-20);
 			cru.addObserver(this);
 			getContentPane().add(cru);
 			loa.add(cru);
@@ -102,7 +103,7 @@ public class FRPosicionaArmas extends JFrame implements EscutaCliqueCampoBatalha
 		
 		// Couracados
 		xAux = 20;
-		Couracado cou = new Couracado(xAux, 300, -2, -2);
+		Couracado cou = new Couracado(xAux, 300, -20, -20);
 		cou.addObserver(this);
 		getContentPane().add(cou);
 		loa.add(cou);
@@ -111,7 +112,7 @@ public class FRPosicionaArmas extends JFrame implements EscutaCliqueCampoBatalha
 		xAux = 20;
 		int largHid = Hidroaviao.getLarguraPadrao() + (largDivArmas - (Hidroaviao.getLarguraPadrao() * 6)) /6 ;
 		for(int i=0; i<5; i++) {
-			Hidroaviao hid = new Hidroaviao(xAux,400,-2,-2);
+			Hidroaviao hid = new Hidroaviao(xAux,400,-20,-20);
 			hid.addObserver(this);
 			getContentPane().add(hid);
 			loa.add(hid);
@@ -145,17 +146,19 @@ public class FRPosicionaArmas extends JFrame implements EscutaCliqueCampoBatalha
 	private int[][] geraMatriz(){
 		int matriz[][] = new int[15][15];
 		int contaArmasFaltando = 0;
-		int contaQuadrado = 0;
 		ArrayList<QuadradoArma> quad = new ArrayList<QuadradoArma>();
 		for(Arma a: loa) {
 			for(QuadradoArma q: a.getListQuadradoArma()) {
 				int relX, relY;
-				contaQuadrado++;
 				relX = q.getRelX();
 				relY = q.getRelY();
 				System.out.print(relX + " - " + relY + "\n");
 				if((relX < 0 || relX > 14) || (relY < 0 || relY > 14)) {
+					if(!(relX < -9 || relY < -9)) {
+						q.setCor(Color.red);
+					}
 					contaArmasFaltando++;
+					
 				}
 				else if(checaConflitos(q, a)) {
 					q.setCor(a.getCor());
@@ -163,7 +166,6 @@ public class FRPosicionaArmas extends JFrame implements EscutaCliqueCampoBatalha
 				}
 				else {
 					q.setCor(Color.red);
-					matriz[relY][relX] = -1;
 				}
 			}
 		}
@@ -171,7 +173,6 @@ public class FRPosicionaArmas extends JFrame implements EscutaCliqueCampoBatalha
 			matriz[0][0] = -1; // Para marcar que a matriz não está OK
 			System.out.print("Nem todas as armas foram posicionadas!\n");
 		}
-		System.out.print("Quadrado contados " + contaQuadrado + "\n");
 		repaint();
 		return matriz;
 	}

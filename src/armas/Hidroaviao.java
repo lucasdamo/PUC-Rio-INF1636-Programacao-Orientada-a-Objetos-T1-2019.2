@@ -7,7 +7,7 @@ public class Hidroaviao extends Arma {
 		super(x, y, relX, relY);
 		this.move(this.x, this.y, this.relX, this.relY);
 		rotate(this.relX, this.relY);
-		cor = Color.green;
+		cor = new Color(10, 79, 1);
 		setCor(cor);
 	}
 	public static int getLarguraPadrao() {

@@ -7,7 +7,7 @@ public class Destroyer extends Arma {
 		super(x, y, relX, relY);
 		this.move(this.x, this.y, this.relX, this.relY);
 		rotate(this.relX, this.relY);
-		cor = Color.yellow;
+		cor = new Color(217, 213, 4);
 		setCor(cor);
 	}
 	public static int getLarguraPadrao() {
