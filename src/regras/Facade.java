@@ -88,6 +88,9 @@ public class Facade implements Observable {
 		}
 		else throw new ErroAoIdentificarJogador("\"Id do jogador <\" + jog.getNome() + \"> não é 1 nem 2");
 	}
+	public void mudaVez() {
+		ctrl.mudaVez();
+	}
 	
 	
 }

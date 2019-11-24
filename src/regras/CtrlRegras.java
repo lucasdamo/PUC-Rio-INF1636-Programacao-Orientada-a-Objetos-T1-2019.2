@@ -5,7 +5,7 @@ import observador.Observable;
 import observador.Observer;
 
 public class CtrlRegras {
-	int campoJog1[][] = new int[15][15];
+	int campoJog1[][] = new int[15][15]; // 0 = agua  1 = navio  2 = tiro perdido  3 = tiro em navio
 	int campoJog2[][] = new int[15][15];
 	Jogador vez;
 	Jogador [] jogadores = new Jogador[2];
@@ -48,19 +48,32 @@ public class CtrlRegras {
 	}
 	public void atira(int i, int j, Jogador jog) {
 		//System.out.print(i + " " + j + " " + jog + "\n");
-		if(jog.getId() == 1) {
-			if(vez.id == 1) {
-				campoJog1[i][j] = 1;
-				tiros--;
+		if(tiros>0) {
+			if(jog.getId() == 1) {
+				if(vez.id == 2) {
+					if(campoJog1[i][j] == 1) {
+						campoJog1[i][j] = 3;
+						tiros--;
+					}
+					else if(campoJog1[i][j] == 0) {
+						campoJog1[i][j] = 2;
+						tiros--;
+					}
+				}
+			}
+			else if(jog.getId() ==2) {
+				if(vez.id == 1) {
+					if(campoJog2[i][j] == 1) {
+						campoJog2[i][j] = 3;
+						tiros--;
+					}
+					else if(campoJog2[i][j] == 0) {
+						campoJog2[i][j] = 2;
+						tiros--;
+					}
+				}
 			}
 		}
-		else if(jog.getId() ==2) {
-			if(vez.id == 2) {
-				campoJog2[i][j] = 1;
-				tiros--;
-			}
-		}
-		if(tiros < 1) mudaVez();
 	}
 	public void createJogadores(String nome1, String nome2) {
 		this.jogadores[0] = new Jogador(nome1, 1);
