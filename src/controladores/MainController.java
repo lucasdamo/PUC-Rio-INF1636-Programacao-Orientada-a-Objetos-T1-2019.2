@@ -15,7 +15,7 @@ public class MainController implements Observer {
 	static MainController mainControl = null;
 	public MainController() {
 		MainController.setControl(this);
-		this.estadoAtual = estadoAtual.Inicio;
+		this.estadoAtual = estadoAtual.PosicionamentoArmasJog1;
 		executaEstadoAtual();
 	}
 	
@@ -48,6 +48,7 @@ public class MainController implements Observer {
 				frameAtual = new FRMenuInicial();
 				break;
 			case PosicionamentoArmasJog1:
+				f.createJogadores("A", "B");
 				frameAtual = new FRPosicionaArmas(f, f.getJogador1());
 				break;
 			case PosicionamentoArmasJog2:

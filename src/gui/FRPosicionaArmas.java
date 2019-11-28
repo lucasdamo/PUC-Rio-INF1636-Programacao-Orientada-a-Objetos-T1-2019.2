@@ -16,7 +16,11 @@ import observador.*;
 import observador.Observable;
 import observador.Observer;
 import tratadores.ErroAoIdentificarJogador;
-public class FRPosicionaArmas extends JFrame implements EscutaCliqueCampoBatalha, Observer, KeyListener {
+public class FRPosicionaArmas extends JFrame implements EscutaCliqueCampoBatalha, Observer, KeyListener, MouseListener {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6036353713634699387L;
 	Facade facade;
 	Jogador jogador;
 	Arma armaSelecionada = null;
@@ -28,6 +32,8 @@ public class FRPosicionaArmas extends JFrame implements EscutaCliqueCampoBatalha
 	public FRPosicionaArmas(Facade f, Jogador jog) {
 		this.jogador = jog;
 		this.addKeyListener(this);
+		this.addMouseListener(this);
+		this.setFocusable(true);
 		this.setLayout(null);
 		Toolkit tk=Toolkit.getDefaultToolkit();
 		Dimension screenSize=tk.getScreenSize();
@@ -123,7 +129,6 @@ public class FRPosicionaArmas extends JFrame implements EscutaCliqueCampoBatalha
 		getContentPane().add(campoDeBatalha);
 		repaint();
 	}
-	
 	private boolean checaConflitos(QuadradoArma quadrado, Arma arma) {
 		ArrayList<Arma> armasAux = (ArrayList<Arma>) loa.clone();
 		int relX = quadrado.getRelX();
@@ -142,7 +147,6 @@ public class FRPosicionaArmas extends JFrame implements EscutaCliqueCampoBatalha
 		}
 		return true;
 	}
-	
 	private int[][] geraMatriz(){
 		int matriz[][] = new int[15][15];
 		int contaArmasFaltando = 0;
@@ -152,7 +156,6 @@ public class FRPosicionaArmas extends JFrame implements EscutaCliqueCampoBatalha
 				int relX, relY;
 				relX = q.getRelX();
 				relY = q.getRelY();
-				System.out.print(relX + " - " + relY + "\n");
 				if((relX < 0 || relX > 14) || (relY < 0 || relY > 14)) {
 					if(!(relX < -9 || relY < -9)) {
 						q.setCor(Color.red);
@@ -171,7 +174,6 @@ public class FRPosicionaArmas extends JFrame implements EscutaCliqueCampoBatalha
 		}
 		if(contaArmasFaltando != 0) {
 			matriz[0][0] = -1; // Para marcar que a matriz não está OK
-			System.out.print("Nem todas as armas foram posicionadas!\n");
 		}
 		repaint();
 		return matriz;
@@ -186,7 +188,6 @@ public class FRPosicionaArmas extends JFrame implements EscutaCliqueCampoBatalha
 		System.out.print("Armas OK");
 		return true;
 	}
-	
 	public void recebeClique(int x, int y, Jogador jogador) {
 		/* Recebe clique no campo de batalha */
 		if(armaSelecionada != null) {
@@ -196,7 +197,6 @@ public class FRPosicionaArmas extends JFrame implements EscutaCliqueCampoBatalha
 			JOptionPane.showMessageDialog(null, "Nenhuma arma foi selecionada!", "InfoBox", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
-	@Override
 	public void notify(Observable o) {
 		// Arma selecionada
 		if(armaSelecionada == null) {
@@ -205,9 +205,7 @@ public class FRPosicionaArmas extends JFrame implements EscutaCliqueCampoBatalha
 			armaSelecionada.repaint();
 		}
 	}
-	@Override
 	public void keyPressed(KeyEvent arg0) {
-		// TODO Auto-generated method stub
 		int keyCode;
 		keyCode = arg0.getKeyCode();
 		//System.out.print(keyCode);
@@ -223,22 +221,20 @@ public class FRPosicionaArmas extends JFrame implements EscutaCliqueCampoBatalha
 				armaSelecionada = null;
 			}
 		}
-		if(keyCode == 82) {
-			/* R */
-			System.out.print("KEYCODE 82 RECEBIDO\n");
-			if(armaSelecionada != null) {
-				armaSelecionada.changeRotatation();
-			}
-		}
 	}
-	@Override
 	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
+	}
+	public void keyTyped(KeyEvent arg0) {
+	}
+	public void mouseClicked(MouseEvent e) {
 		
 	}
-	@Override
-	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
+	public void mouseEntered(MouseEvent e) {
+	}
+	public void mouseExited(MouseEvent e) {
+	}
+	public void mousePressed(MouseEvent e) {
+	}
+	public void mouseReleased(MouseEvent e) {
 	}
 }

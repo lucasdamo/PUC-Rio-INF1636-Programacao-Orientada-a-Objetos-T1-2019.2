@@ -21,6 +21,9 @@ public class Destroyer extends Arma {
 	@Override
 	public void rotate(int relX, int relY) {
 		// Submarino so tem 1 quadrado, rotacionar nao importa
+		Color prevCor = cor;
+		if(!loqa.isEmpty())
+			prevCor = loqa.get(0).getCor();
 		loqa.removeAll(loqa);
 		switch(this.rot) {
 			case ZeroGraus:
@@ -40,6 +43,8 @@ public class Destroyer extends Arma {
 				this.changeRotatation();
 				break;
 		}	
+		if(prevCor != null)
+			setCor(prevCor);
 		this.setBounds(this.x, this.y, this.largura, this.altura);
 		repaint();
 	}

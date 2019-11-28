@@ -23,7 +23,6 @@ public class QuadradoArma extends JPanel {
 		this.relY = relY;this.setLayout(null);
 		this.x = x;
 		this.y = y;
-		System.out.print("Quadrado criado " + x + ", " + y + ", " + relX + ", " + relY + "\n");
 	}
 	public int getRelX() {
 		return relX;
@@ -51,6 +50,9 @@ public class QuadradoArma extends JPanel {
 	}
 	public void setCor(Color cor) {
 		this.cor = cor;
+	}
+	public Color getCor() {
+		return this.cor;
 	}
 	public void setOpaque(float opValue) {
 		this.opaque = opValue;

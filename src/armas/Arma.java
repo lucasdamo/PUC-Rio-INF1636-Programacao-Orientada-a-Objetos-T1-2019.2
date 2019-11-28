@@ -36,7 +36,6 @@ public abstract class Arma extends JPanel implements MouseListener, Observable {
 		this.y = y;
 		this.relX = relX;
 		this.relY = relY;
-		System.out.print("Arma criada " + x + ", " + y + " " + relX + " " + relY + "\n");
 	}
 	
 	public int getLargura() {
@@ -70,7 +69,6 @@ public abstract class Arma extends JPanel implements MouseListener, Observable {
 		this.y = y;
 		this.relX = relX;
 		this.relY = relY;
-		System.out.print("Moved to " + this.x + ", " + this.y + "\n");
 		this.setLocation(x,y);
 		rotate(relX, relY);
 	}
@@ -107,9 +105,14 @@ public abstract class Arma extends JPanel implements MouseListener, Observable {
 		return this;
 	}
 	public void mouseClicked(MouseEvent e) { 
-		System.out.print("Arma clicada\n");
-		for(Observer o: lob) {
-			o.notify(this);
+		if(SwingUtilities.isLeftMouseButton(e)) {
+			for(Observer o: lob) {
+				o.notify(this);
+			}
+		}
+		else if (SwingUtilities.isRightMouseButton(e)) {
+			this.changeRotatation();
+			this.rotate(this.relX, this.relY);
 		}
 	}
 	public void mouseEntered(MouseEvent e) {}

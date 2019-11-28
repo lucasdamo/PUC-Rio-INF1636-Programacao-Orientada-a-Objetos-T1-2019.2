@@ -122,12 +122,12 @@ public class PNCampoDeBatalha extends JPanel implements MouseListener, AvisaCliq
 	
 	
 	public void mouseClicked(MouseEvent e) { 
-		int x=e.getX(),y=e.getY();
-		System.out.print("Mouse Clicado x=" + x + " y=" + y + "  ");
-		x = (int)( (double) (x - xIni) / larg);
-		y = (int)( (double) (y - yIni) / alt);
-		System.out.print("Celula ("+ x + ", " + y + ")\n");
-		avisaCliqueObservadores(x, y, this.jog);
+		if(SwingUtilities.isLeftMouseButton(e)) {
+			int x=e.getX(),y=e.getY();
+			x = (int)( (double) (x - xIni) / larg);
+			y = (int)( (double) (y - yIni) / alt);
+			avisaCliqueObservadores(x, y, this.jog);
+		}
 	}
 	
 	public double getAbsX(int x, int y) {

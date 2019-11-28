@@ -21,6 +21,9 @@ public class Hidroaviao extends Arma {
 	@Override
 	public void rotate(int relX, int relY) {
 		// Submarino so tem 1 quadrado, rotacionar nao importa
+		Color prevCor = cor;
+		if(!loqa.isEmpty())
+			prevCor = loqa.get(0).getCor();
 		loqa.removeAll(loqa);
 		switch(this.rot) {
 			case ZeroGraus:
@@ -52,6 +55,8 @@ public class Hidroaviao extends Arma {
 				loqa.add(new QuadradoArma(QuadradoArma.getLargura(), QuadradoArma.getAltura() * 2, this.relX + 1, this.relY + 2));	
 				break;
 		}	
+		if(prevCor != null)
+			setCor(prevCor);
 		this.setBounds(this.x, this.y, this.largura, this.altura);
 		repaint();
 	}
