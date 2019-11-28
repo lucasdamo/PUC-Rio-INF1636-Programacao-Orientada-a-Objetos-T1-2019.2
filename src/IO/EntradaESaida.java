@@ -1,5 +1,6 @@
 package IO;
 import regras.*;
+
 import java.io.*;
 
 public final class EntradaESaida {
@@ -20,10 +21,10 @@ public final class EntradaESaida {
 		}
 	}
 	
-	public static void CarregarJogo(String path) {
+	public static void CarregarJogo(File inputFile) {
 		FileInputStream f;
 		try {
-			f = new FileInputStream( new File(path));
+			f = new FileInputStream(inputFile);
 			ObjectInputStream o = new ObjectInputStream(f);
 			CtrlRegras ctrl = (CtrlRegras) o.readObject();
 			Facade.getFacade().setCtrlRegras(ctrl);

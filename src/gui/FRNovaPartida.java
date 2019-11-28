@@ -15,9 +15,9 @@ import observador.Observer;
 
 
 
-public class FRMenuInicial extends JFrame {
+public class FRNovaPartida extends JFrame {
 	Facade f = Facade.getFacade();
-	public FRMenuInicial() {
+	public FRNovaPartida() {
 		JLabel labelNomeJog1 = new JLabel("Nome do jogador 1");
 		JLabel labelNomeJog2 = new JLabel("Nome do jogador 2");
 		JTextField inputNomeJog1 = new JTextField();
