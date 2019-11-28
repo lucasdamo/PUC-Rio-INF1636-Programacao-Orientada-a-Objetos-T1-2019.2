@@ -1,5 +1,6 @@
 package regras;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,10 +9,10 @@ import observador.Observer;
 
 import tratadores.*;
 
-public class Facade implements Observable {
+public class Facade implements Observable, Serializable {
+	private static final long serialVersionUID = -5439405546289188343L;
 	CtrlRegras ctrl;
 	static Facade f = null;
-	List<Observer> lob=new ArrayList<Observer>();
 	public Facade() {
 		ctrl = new CtrlRegras();
 	}
@@ -36,10 +37,10 @@ public class Facade implements Observable {
 		notifyObservers();
 	}
 	public void addObserver(Observer o) {
-		lob.add(o);
+		ctrl.addObserver(o);
 	}
 	public void removeObserver(Observer o) {
-		lob.remove(o);
+		ctrl.removeObserver(o);
 	}
 	public Object get() {
 		return this;
@@ -48,7 +49,7 @@ public class Facade implements Observable {
 		return 0;
 	}
 	private void notifyObservers() {
-		for(Observer o:lob)
+		for(Observer o:  ctrl.getListObserver())
 			o.notify(this);
 	}
 	public void createJogadores(String nomeJog1, String nomeJog2) {
@@ -91,6 +92,11 @@ public class Facade implements Observable {
 	public void mudaVez() {
 		ctrl.mudaVez();
 	}
-	
+	public void setCtrlRegras(CtrlRegras r) {
+		this.ctrl = r;
+	}
+	public CtrlRegras getCtrlRegras() {
+		return this.ctrl;
+	}
 	
 }

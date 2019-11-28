@@ -1,10 +1,12 @@
 package regras;
 
+import java.io.Serializable;
 import java.util.*;
 import observador.Observable;
 import observador.Observer;
 
-public class CtrlRegras {
+public class CtrlRegras implements Serializable, Observable {
+	private static final long serialVersionUID = -6555979743264778672L;
 	int campoJog1[][] = new int[15][15]; // 0 = agua  1 = navio  2 = tiro perdido  3 = tiro em navio
 	int campoJog2[][] = new int[15][15];
 	Jogador vez;
@@ -92,5 +94,17 @@ public class CtrlRegras {
 	}
 	public int getNumeroTiros() {
 		return this.tiros;
+	}
+	public List<Observer> getListObserver(){
+		return this.lob;
+	}
+	public void addObserver(Observer o) {
+		lob.add(o);
+	}
+	public void removeObserver(Observer o) {
+		lob.remove(o);
+	}
+	public Object get() {
+		return null;
 	}
 }

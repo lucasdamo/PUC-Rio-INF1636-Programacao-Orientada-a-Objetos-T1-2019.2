@@ -1,6 +1,9 @@
 package regras;
 
-public class Jogador {
+import java.io.Serializable;
+
+public class Jogador implements Serializable {
+	private static final long serialVersionUID = -1045071845628557519L;
 	String nome;
 	int id;
 	public Jogador(String nome, int id) {
