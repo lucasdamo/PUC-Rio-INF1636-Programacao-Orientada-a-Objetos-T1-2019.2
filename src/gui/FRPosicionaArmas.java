@@ -165,7 +165,7 @@ public class FRPosicionaArmas extends JFrame implements EscutaCliqueCampoBatalha
 				}
 				else if(checaConflitos(q, a)) {
 					q.setCor(a.getCor());
-					matriz[relY][relX] = 1;
+					matriz[relX][relY] = 1;
 				}
 				else {
 					q.setCor(Color.red);
