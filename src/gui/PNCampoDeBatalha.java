@@ -108,7 +108,7 @@ public class PNCampoDeBatalha extends JPanel implements MouseListener, AvisaCliq
 		}
 		for(int i=0;i<15;i++) {
 			for(int j=0;j<15;j++) {
-				if(campoJog[j][i] == 1 && jog.equals(f.getJogadorDaVez())) g2d.setPaint(new Color(27,115,2));
+				if(campoJog[j][i] == 1 && (jog.equals(f.getJogadorDaVez()) || f.checaGanhador() != null)) g2d.setPaint(new Color(27,115,2));
 				else if(campoJog[j][i] == 2) g2d.setPaint(new Color(0, 10, 69));
 				else if(campoJog[j][i] == 3) g2d.setPaint(new Color(207, 2, 2));
 				else if(campoJog[j][i] == 4) g2d.setPaint(new Color(115, 2, 17));

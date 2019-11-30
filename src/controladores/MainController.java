@@ -15,7 +15,7 @@ public class MainController implements Observer {
 	static MainController mainControl = null;
 	public MainController() {
 		MainController.setControl(this);
-		this.estadoAtual = estadoAtual.Batalha;
+		this.estadoAtual = estadoAtual.Inicio;
 		executaEstadoAtual();
 	}
 	
@@ -64,19 +64,19 @@ public class MainController implements Observer {
 				break;
 			case Batalha:
 				// --- Inicio stub para teste ---
-				int[][] tab1 = new int[15][15];
-				int[][] tab2 = new int[15][15];
-				tab1[0][0] = 1;
-				tab1[0][1] = 1;
-				tab2[14][14] = 1;
-				tab2[14][13] = 1;
-				f.createJogadores("A", "B");
-				try {
-					f.setTab(tab1, f.getJogador1());
-					f.setTab(tab2, f.getJogador2());
-				} catch (ErroAoIdentificarJogador e) {
-					e.printStackTrace();
-				}
+//				int[][] tab1 = new int[15][15];
+//				int[][] tab2 = new int[15][15];
+//				tab1[0][0] = 1;
+//				tab1[0][1] = 1;
+//				tab2[14][14] = 1;
+//				tab2[14][13] = 1;
+//				f.createJogadores("A", "B");
+//				try {
+//					f.setTab(tab1, f.getJogador1());
+//					f.setTab(tab2, f.getJogador2());
+//				} catch (ErroAoIdentificarJogador e) {
+//					e.printStackTrace();
+//				}
 				// --- fim ---
 				frameAtual = new FRBatalhaNaval(f);
 				break;

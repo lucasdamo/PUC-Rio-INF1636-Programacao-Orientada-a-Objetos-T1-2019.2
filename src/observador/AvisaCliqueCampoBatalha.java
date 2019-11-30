@@ -1,4 +1,6 @@
 package observador;
+import java.io.Serializable;
+
 import regras.Jogador;
 
 public interface AvisaCliqueCampoBatalha {

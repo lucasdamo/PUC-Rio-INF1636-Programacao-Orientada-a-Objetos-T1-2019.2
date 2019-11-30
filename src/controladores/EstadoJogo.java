@@ -6,5 +6,4 @@ public enum EstadoJogo {
 	PosicionamentoArmasJog1,
 	PosicionamentoArmasJog2,
 	Batalha,
-	ResumoDaBatalha,
 }

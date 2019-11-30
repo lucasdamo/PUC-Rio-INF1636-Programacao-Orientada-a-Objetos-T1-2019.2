@@ -96,5 +96,7 @@ public class Facade implements Observable, Serializable {
 	public CtrlRegras getCtrlRegras() {
 		return this.ctrl;
 	}
-	
+	public void reiniciaPartida() {
+		ctrl = new CtrlRegras();
+	}
 }

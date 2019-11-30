@@ -41,9 +41,9 @@ public class FRPosicionaArmas extends JFrame implements EscutaCliqueCampoBatalha
 		double wid = screenSize.getWidth(), hei = screenSize.getHeight();
 		this.setBounds(0,0,(int)wid,(int)hei);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		campoX = wid/2 + 10;
+		campoX = wid/2 + 30;
 		campoY = 20;
-		campoDeBatalha = new PNCampoDeBatalha(campoX, campoY, wid/2 - 10, hei - 100);
+		campoDeBatalha = new PNCampoDeBatalha(campoX, campoY, wid/3, 2*hei/3);
 		campoDeBatalha.setJog(jogador);
 		campoDeBatalha.addCliqueListener(this);
 		setTitle("Posicionamento de armas para jogador");

@@ -12,9 +12,10 @@ public class CtrlRegras implements Serializable, Observable {
 	Jogador vez;
 	Jogador [] jogadores = new Jogador[2];
 	String nomeJog1, nomeJog2;
-	List<Observer> lob=new ArrayList<Observer>();
+	transient List<Observer> lob; // Problema com o serializable
 	int tiros;
 	public CtrlRegras() {
+		lob = new ArrayList<Observer>();
 		vez = jogadores[0];
 		for(int i = 0; i<15; i++) {
 			for(int j = 0; j<15; j++) {
@@ -119,7 +120,10 @@ public class CtrlRegras implements Serializable, Observable {
 		return this.lob;
 	}
 	public void addObserver(Observer o) {
+		if(lob==null)
+			lob = new ArrayList<Observer>();
 		lob.add(o);
+		
 	}
 	public void removeObserver(Observer o) {
 		lob.remove(o);
@@ -131,5 +135,8 @@ public class CtrlRegras implements Serializable, Observable {
 	}
 	public Object get() {
 		return null;
+	}
+	public void reiniciaPartida() {
+		
 	}
 }

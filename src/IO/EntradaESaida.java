@@ -44,7 +44,8 @@ public final class EntradaESaida {
 		Jogador j1;
 		f.createJogadores("A", "B");
 		EntradaESaida.SalvarJogo("/home/lucas/save");
-		EntradaESaida.CarregarJogo("/home/lucas/save");
+		File a = new File("/home/lucas/save");
+		EntradaESaida.CarregarJogo(a);
 		j1 = f.getJogador1();
 		System.out.print(j1.getNome());
 	}

@@ -37,6 +37,7 @@ public class FRMenuInicial extends JFrame {
 		getContentPane().add(carregaJogo);
 		botaoInicia.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            	Facade.getFacade().reiniciaPartida();
             	MainController.getControl().nextEstado();
             }
         });
