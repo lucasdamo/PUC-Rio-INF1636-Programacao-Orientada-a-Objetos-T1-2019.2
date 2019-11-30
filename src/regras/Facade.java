@@ -34,7 +34,6 @@ public class Facade implements Observable, Serializable {
 	
 	public void atira(int x, int y, Jogador jog) {
 		ctrl.atira(x, y, jog);
-		notifyObservers();
 	}
 	public void addObserver(Observer o) {
 		ctrl.addObserver(o);
@@ -48,12 +47,11 @@ public class Facade implements Observable, Serializable {
 	public int tipo() {
 		return 0;
 	}
-	private void notifyObservers() {
-		for(Observer o:  ctrl.getListObserver())
-			o.notify(this);
-	}
 	public void createJogadores(String nomeJog1, String nomeJog2) {
 		ctrl.createJogadores(nomeJog1, nomeJog2);
+	}
+	public Jogador checaGanhador() {
+		return ctrl.checaGanhador();
 	}
 	public int[][] getTabJogador(Jogador jog) throws ErroAoIdentificarJogador {
 		if(jog.getId() == 1) {

@@ -38,6 +38,8 @@ public class CtrlRegras implements Serializable, Observable {
 		return campoJog2;
 	}
 	public Jogador getVez() {
+		if(vez==null)
+			vez = jogadores[0];
 		return vez;
 	}
 	private void novaVez() {
@@ -48,7 +50,23 @@ public class CtrlRegras implements Serializable, Observable {
 		else vez = jogadores[0];
 		novaVez();
 	}
+	public Jogador checaGanhador() {
+		boolean jog1PodeGanhar = false;
+		boolean jog2PodeGanhar = false;
+		for(int i = 0; i<15; i++) {
+			for(int j = 0; j<15; j++) {
+				if(campoJog1[i][j] == 1) jog1PodeGanhar = true;
+				if(campoJog2[i][j] == 1) jog2PodeGanhar = true;
+			}
+		}
+		if(jog1PodeGanhar == false)
+			return jogadores[1];
+		if(jog2PodeGanhar == false)
+			return jogadores[0];
+		return null;
+	}
 	public void atira(int i, int j, Jogador jog) {
+		Jogador ganhador = null;
 		//System.out.print(i + " " + j + " " + jog + "\n");
 		if(tiros>0) {
 			if(jog.getId() == 1) {
@@ -76,12 +94,14 @@ public class CtrlRegras implements Serializable, Observable {
 				}
 			}
 		}
+		notifyObservers();
 	}
 	public void createJogadores(String nome1, String nome2) {
 		this.jogadores[0] = new Jogador(nome1, 1);
 		this.jogadores[1] = new Jogador(nome2, 2);
 		
 		vez = jogadores[0];
+		notifyObservers();
 	}
 	public Jogador getJogador1() {
 		return jogadores[0];
@@ -103,6 +123,11 @@ public class CtrlRegras implements Serializable, Observable {
 	}
 	public void removeObserver(Observer o) {
 		lob.remove(o);
+	}
+	private void notifyObservers() {
+		for(Observer o: lob) {
+			o.notify(this);
+		}
 	}
 	public Object get() {
 		return null;

@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import observador.*;
 
-public class FRBatalhaNaval extends JFrame implements EscutaCliqueCampoBatalha {
+public class FRBatalhaNaval extends JFrame implements EscutaCliqueCampoBatalha, Observer {
 	Facade facade;
 	JLabel labelJogadorDaVez;
 	JLabel numeroDeTirosRestantes;
@@ -21,6 +21,7 @@ public class FRBatalhaNaval extends JFrame implements EscutaCliqueCampoBatalha {
 		Toolkit tk=Toolkit.getDefaultToolkit();
 		Dimension screenSize=tk.getScreenSize();
 		this.facade = f;
+		facade.addObserver(this);
 		double wid = screenSize.getWidth(), hei = screenSize.getHeight();
 		this.setBounds(0,0,(int)wid,(int)hei);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -86,11 +87,19 @@ public class FRBatalhaNaval extends JFrame implements EscutaCliqueCampoBatalha {
 		tabDir.setVisible(false);
 		botaoIniciarVez.setVisible(true);
 		numeroDeTirosRestantes.setVisible(false);
-	}
-	
+		botaoFinalizarVez.setEnabled(false);
+	}	
 	public void recebeClique(int x, int y, Jogador jogador) {
 		facade.atira(x, y, jogador);
 		if(facade.getNumeroTirosRestantes() < 1) botaoFinalizarVez.setEnabled(true);
 		changeLabelNumeroDeTiros();
+	}
+
+	public void notify(Observable o) {
+		Jogador ganhador = null;
+		ganhador = Facade.getFacade().checaGanhador();
+		if(ganhador != null) {
+			JOptionPane.showMessageDialog(null, "Jogador " + ganhador.getNome() + " ganhou!", "InfoBox", JOptionPane.INFORMATION_MESSAGE);
+		}
 	}
 }

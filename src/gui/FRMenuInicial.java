@@ -12,8 +12,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import IO.EntradaESaida;
+
 import java.io.*;
 
+import controladores.EstadoJogo;
 import controladores.MainController;
 import regras.Facade;
 
@@ -43,6 +46,9 @@ public class FRMenuInicial extends JFrame {
 				if(returnValue == JFileChooser.APPROVE_OPTION) {
 					File selectedFile = carregaJogo.getSelectedFile();
 					System.out.print(selectedFile.getAbsolutePath());
+					EntradaESaida.CarregarJogo(selectedFile);
+					MainController.getControl().setEstado(EstadoJogo.Batalha);
+					
 				}
             }
 		});
