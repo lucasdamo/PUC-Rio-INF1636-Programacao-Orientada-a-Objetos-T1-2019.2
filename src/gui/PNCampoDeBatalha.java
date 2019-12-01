@@ -77,13 +77,17 @@ public class PNCampoDeBatalha extends JPanel implements MouseListener, AvisaCliq
 	private void desenhaIndices(Graphics g) {
 		Graphics2D g2d=(Graphics2D) g;
 		g2d.setPaint(Color.black);
+		char letra = 'A';
 		//System.out.print("\nCoordenadas Campo [" + xIni +", " + yIni + "] " + " -- [" + xIni + larg + ", " + yIni + alt + "]\n");
 		for(int i =0; i<15; i++) {
+		
 			String write = Integer.toString(i+1);
 			g2d.drawString(write, (int) (tab[0][i].x + larg/3), (int) yIni/2); // (yIni / 2) porque 0 não exibe a string
-			g2d.drawString(write, 0, (int) (tab[i][0].y + alt/2));
+			g2d.drawString("" + letra, 0, (int) (tab[i][0].y + alt/2));
+			//g2d.drawString(write, 0, (int) (tab[i][0].y + alt/2));
 			//System.out.print("Coordenadas stringX: " + (int) (tab[0][i].x + larg/2) + ", 0\n");
 			//System.out.print("Coordenadas stringY: 0, " + (int) (tab[i][0].y + alt/2) + "\n");
+			letra = (char) ((int) letra + 1);
 		}
 	}
 	
